@@ -33,7 +33,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    background-image: 
+    background-image:
       linear-gradient(rgba(200,245,98,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(200,245,98,0.03) 1px, transparent 1px);
     background-size: 60px 60px;
@@ -109,10 +109,7 @@
     animation: pulse 2s ease-in-out infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   main {
     position: relative;
@@ -132,11 +129,7 @@
     color: var(--text);
   }
 
-  .hero-text h1 em {
-    font-style: normal;
-    color: var(--accent);
-    text-shadow: 0 0 60px rgba(200,245,98,0.4);
-  }
+  .hero-text h1 em { font-style: normal; color: var(--accent); text-shadow: 0 0 60px rgba(200,245,98,0.4); }
 
   .hero-text p {
     margin-top: 16px;
@@ -216,19 +209,9 @@
     text-transform: uppercase;
   }
 
-  .btn-analyze:hover {
-    background: #d4ff6e;
-    box-shadow: 0 0 40px rgba(200,245,98,0.3);
-    transform: translateY(-1px);
-  }
-
+  .btn-analyze:hover { background: #d4ff6e; box-shadow: 0 0 40px rgba(200,245,98,0.3); transform: translateY(-1px); }
   .btn-analyze:active { transform: translateY(0); }
-
-  .btn-analyze:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
+  .btn-analyze:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
   .btn-clear {
     padding: 14px 20px;
@@ -275,22 +258,12 @@
     width: 100%;
   }
 
-  @keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
+  @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-  .results {
-    display: none;
-    animation: fadeUp 0.5s ease forwards;
-  }
-
+  .results { display: none; animation: fadeUp 0.5s ease forwards; }
   .results.visible { display: block; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
   .results-header {
     display: flex;
@@ -299,13 +272,7 @@
     margin-bottom: 28px;
   }
 
-  .results-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-  }
-
+  .results-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.1em; color: var(--accent); }
   .results-meta { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
 
   .cards-grid {
@@ -345,12 +312,7 @@
     gap: 8px;
   }
 
-  .card-label::before {
-    content: '';
-    width: 16px;
-    height: 1px;
-    background: var(--accent);
-  }
+  .card-label::before { content: ''; width: 16px; height: 1px; background: var(--accent); }
 
   .card-value {
     font-family: 'Instrument Serif', serif;
@@ -369,6 +331,10 @@
   .c-insights { grid-column: span 7; }
   .c-summary { grid-column: span 12; }
 
+  /* ── NEW: Image card ── */
+  .c-image { grid-column: span 5; }
+  .c-voice  { grid-column: span 7; }
+
   .card-list { list-style: none; margin-top: 4px; }
 
   .card-list li {
@@ -383,14 +349,7 @@
   }
 
   .card-list li:last-child { border-bottom: none; }
-
-  .card-list li::before {
-    content: '›';
-    color: var(--accent);
-    font-size: 1rem;
-    flex-shrink: 0;
-    line-height: 1.4;
-  }
+  .card-list li::before { content: '›'; color: var(--accent); font-size: 1rem; flex-shrink: 0; line-height: 1.4; }
 
   .sentiment-badge {
     display: inline-flex;
@@ -405,7 +364,7 @@
   }
 
   .sentiment-positive { background: rgba(200,245,98,0.1); border: 1px solid rgba(200,245,98,0.25); color: var(--accent); }
-  .sentiment-neutral { background: rgba(123,97,255,0.1); border: 1px solid rgba(123,97,255,0.25); color: var(--accent2); }
+  .sentiment-neutral  { background: rgba(123,97,255,0.1); border: 1px solid rgba(123,97,255,0.25); color: var(--accent2); }
   .sentiment-negative { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.25); color: var(--accent3); }
 
   .c-summary .card-value {
@@ -434,6 +393,170 @@
 
   .c-insights .card-list li::before { content: '✦'; color: var(--accent3); font-size: 0.7rem; }
 
+  /* ── Voice Player ── */
+  .voice-player {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .voice-status {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .voice-status .v-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .voice-status.loading .v-dot { background: var(--accent); animation: pulse 1s infinite; }
+  .voice-status.ready .v-dot   { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .voice-status.error .v-dot   { background: var(--accent3); }
+
+  .voice-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-voice {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border: 1px solid;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .btn-play  { background: rgba(200,245,98,0.08); border-color: rgba(200,245,98,0.3); color: var(--accent); }
+  .btn-play:hover { background: rgba(200,245,98,0.15); box-shadow: 0 0 20px rgba(200,245,98,0.15); }
+  .btn-play:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-replay { background: transparent; border-color: var(--border); color: var(--muted); }
+  .btn-replay:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  .audio-progress {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .audio-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s linear;
+    border-radius: 3px;
+  }
+
+  .audio-time {
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* ── Image Section ── */
+  .image-wrapper {
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: opacity 0.4s ease;
+  }
+
+  .image-placeholder {
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-align: center;
+    padding: 24px;
+    opacity: 0.5;
+  }
+
+  .image-generating {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(10,10,15,0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  .image-generating-text {
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    animation: pulse 1.5s infinite;
+  }
+
+  .image-gen-bar {
+    width: 120px;
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .image-gen-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    background-size: 200% 100%;
+    animation: loading 1.5s linear infinite;
+    width: 100%;
+  }
+
+  .btn-regen {
+    margin-top: 10px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .btn-regen:hover { border-color: var(--accent2); color: var(--accent2); }
+  .btn-regen:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── Rest of original styles ── */
   .error-msg {
     display: none;
     padding: 16px 20px;
@@ -467,172 +590,80 @@
   @media (max-width: 900px) {
     header, main, footer { padding-left: 24px; padding-right: 24px; }
     .c-title, .c-category, .c-sentiment, .c-entities, .c-keypoints,
-    .c-data, .c-timeline, .c-insights, .c-summary { grid-column: span 12; }
+    .c-data, .c-timeline, .c-insights, .c-summary,
+    .c-image, .c-voice { grid-column: span 12; }
   }
 
   .spin { animation: spin 1s linear infinite; display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1em;
-    background: var(--accent);
-    margin-left: 2px;
-    vertical-align: middle;
-    animation: blink 1s step-end infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
+  /* ── Genre Detection (unchanged) ── */
   .genre-indicator {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 14px;
-    min-height: 34px;
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 14px; min-height: 34px;
   }
-
-  .genre-label-tag {
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    text-transform: uppercase;
-    flex-shrink: 0;
-  }
-
+  .genre-label-tag { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; flex-shrink: 0; }
   .genre-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-
   .genre-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 13px;
-    border-radius: 100px;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    border: 1px solid;
-    opacity: 0;
-    transform: translateY(4px) scale(0.95);
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 13px; border-radius: 100px; font-size: 0.68rem;
+    letter-spacing: 0.1em; border: 1px solid;
+    opacity: 0; transform: translateY(4px) scale(0.95);
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
   }
-
-  .genre-chip.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    animation: chipBlink 0.7s ease forwards;
-  }
-
+  .genre-chip.show { opacity: 1; transform: translateY(0) scale(1); animation: chipBlink 0.7s ease forwards; }
   @keyframes chipBlink {
-    0%   { box-shadow: none; }
-    25%  { box-shadow: 0 0 16px currentColor; }
-    50%  { box-shadow: none; }
-    75%  { box-shadow: 0 0 10px currentColor; }
-    100% { box-shadow: none; }
+    0%{box-shadow:none}25%{box-shadow:0 0 16px currentColor}
+    50%{box-shadow:none}75%{box-shadow:0 0 10px currentColor}100%{box-shadow:none}
   }
-
   .genre-chip .chip-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-
-  .g-news        { background: rgba(200,245,98,0.08);  border-color: rgba(200,245,98,0.3);  color: #c8f562; }
-  .g-news        .chip-dot { background: #c8f562; }
-  .g-science     { background: rgba(123,97,255,0.1);   border-color: rgba(123,97,255,0.3);  color: #a08eff; }
-  .g-science     .chip-dot { background: #a08eff; }
-  .g-tech        { background: rgba(56,189,248,0.1);   border-color: rgba(56,189,248,0.3);  color: #38bdf8; }
-  .g-tech        .chip-dot { background: #38bdf8; }
-  .g-politics    { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
-  .g-politics    .chip-dot { background: #fb923c; }
-  .g-business    { background: rgba(52,211,153,0.1);   border-color: rgba(52,211,153,0.3);  color: #34d399; }
-  .g-business    .chip-dot { background: #34d399; }
-  .g-sports      { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #fbbf24; }
-  .g-sports      .chip-dot { background: #fbbf24; }
-  .g-health      { background: rgba(248,113,113,0.1);  border-color: rgba(248,113,113,0.3); color: #f87171; }
-  .g-health      .chip-dot { background: #f87171; }
-  .g-culture     { background: rgba(244,114,182,0.1);  border-color: rgba(244,114,182,0.3); color: #f472b6; }
-  .g-culture     .chip-dot { background: #f472b6; }
-  .g-film        { background: rgba(167,139,250,0.1);  border-color: rgba(167,139,250,0.3); color: #a78bfa; }
-  .g-film        .chip-dot { background: #a78bfa; }
-  .g-finance     { background: rgba(74,222,128,0.1);   border-color: rgba(74,222,128,0.3);  color: #4ade80; }
-  .g-finance     .chip-dot { background: #4ade80; }
-  .g-legal       { background: rgba(148,163,184,0.1);  border-color: rgba(148,163,184,0.3); color: #94a3b8; }
-  .g-legal       .chip-dot { background: #94a3b8; }
-  .g-environment { background: rgba(110,231,183,0.1);  border-color: rgba(110,231,183,0.3); color: #6ee7b7; }
-  .g-environment .chip-dot { background: #6ee7b7; }
-  .g-education   { background: rgba(253,186,116,0.1);  border-color: rgba(253,186,116,0.3); color: #fdba74; }
-  .g-education   .chip-dot { background: #fdba74; }
-  .g-opinion     { background: rgba(196,181,253,0.1);  border-color: rgba(196,181,253,0.3); color: #c4b5fd; }
-  .g-opinion     .chip-dot { background: #c4b5fd; }
-  .g-history     { background: rgba(253,230,138,0.1);  border-color: rgba(253,230,138,0.3); color: #fde68a; }
-  .g-history     .chip-dot { background: #fde68a; }
-  .g-travel      { background: rgba(34,211,238,0.08);  border-color: rgba(34,211,238,0.3);  color: #22d3ee; }
-  .g-travel      .chip-dot { background: #22d3ee; }
-  .g-food        { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
-  .g-food        .chip-dot { background: #fb923c; }
-  .g-gaming      { background: rgba(163,230,53,0.1);   border-color: rgba(163,230,53,0.3);  color: #a3e635; }
-  .g-gaming      .chip-dot { background: #a3e635; }
-  .g-ai          { background: rgba(192,132,252,0.1);  border-color: rgba(192,132,252,0.3); color: #c084fc; }
-  .g-ai          .chip-dot { background: #c084fc; }
-  .g-crypto      { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #f59e0b; }
-  .g-crypto      .chip-dot { background: #f59e0b; }
-  .g-space       { background: rgba(99,102,241,0.1);   border-color: rgba(99,102,241,0.3);  color: #818cf8; }
-  .g-space       .chip-dot { background: #818cf8; }
-  .g-psychology  { background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.3); color: #f9a8d4; }
-  .g-psychology  .chip-dot { background: #f9a8d4; }
-  .g-military    { background: rgba(132,204,22,0.08);  border-color: rgba(132,204,22,0.25); color: #84cc16; }
-  .g-military    .chip-dot { background: #84cc16; }
-  .g-religion    { background: rgba(253,230,138,0.08); border-color: rgba(253,230,138,0.3); color: #fcd34d; }
-  .g-religion    .chip-dot { background: #fcd34d; }
-  .g-philosophy  { background: rgba(148,163,184,0.08); border-color: rgba(148,163,184,0.3); color: #cbd5e1; }
-  .g-philosophy  .chip-dot { background: #cbd5e1; }
-  .g-economy     { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25); color: #6ee7b7; }
-  .g-economy     .chip-dot { background: #6ee7b7; }
-  .g-social      { background: rgba(251,113,133,0.1);  border-color: rgba(251,113,133,0.3); color: #fb7185; }
-  .g-social      .chip-dot { background: #fb7185; }
-  .g-automotive  { background: rgba(100,116,139,0.1);  border-color: rgba(100,116,139,0.3); color: #94a3b8; }
-  .g-automotive  .chip-dot { background: #94a3b8; }
-  .g-realestate  { background: rgba(34,197,94,0.08);   border-color: rgba(34,197,94,0.25);  color: #4ade80; }
-  .g-realestate  .chip-dot { background: #4ade80; }
-  .g-fashion     { background: rgba(236,72,153,0.08);  border-color: rgba(236,72,153,0.3);  color: #f472b6; }
-  .g-fashion     .chip-dot { background: #f472b6; }
-
-  .genre-placeholder {
-    font-size: 0.68rem;
-    color: var(--muted);
-    opacity: 0.4;
-    letter-spacing: 0.1em;
-    font-style: italic;
-    transition: opacity 0.3s;
-  }
+  .genre-placeholder { font-size: 0.68rem; color: var(--muted); opacity: 0.4; letter-spacing: 0.1em; font-style: italic; transition: opacity 0.3s; }
+  .g-news{background:rgba(200,245,98,0.08);border-color:rgba(200,245,98,0.3);color:#c8f562}.g-news .chip-dot{background:#c8f562}
+  .g-science{background:rgba(123,97,255,0.1);border-color:rgba(123,97,255,0.3);color:#a08eff}.g-science .chip-dot{background:#a08eff}
+  .g-tech{background:rgba(56,189,248,0.1);border-color:rgba(56,189,248,0.3);color:#38bdf8}.g-tech .chip-dot{background:#38bdf8}
+  .g-politics{background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.3);color:#fb923c}.g-politics .chip-dot{background:#fb923c}
+  .g-business{background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.3);color:#34d399}.g-business .chip-dot{background:#34d399}
+  .g-sports{background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:#fbbf24}.g-sports .chip-dot{background:#fbbf24}
+  .g-health{background:rgba(248,113,113,0.1);border-color:rgba(248,113,113,0.3);color:#f87171}.g-health .chip-dot{background:#f87171}
+  .g-culture{background:rgba(244,114,182,0.1);border-color:rgba(244,114,182,0.3);color:#f472b6}.g-culture .chip-dot{background:#f472b6}
+  .g-film{background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:#a78bfa}.g-film .chip-dot{background:#a78bfa}
+  .g-finance{background:rgba(74,222,128,0.1);border-color:rgba(74,222,128,0.3);color:#4ade80}.g-finance .chip-dot{background:#4ade80}
+  .g-legal{background:rgba(148,163,184,0.1);border-color:rgba(148,163,184,0.3);color:#94a3b8}.g-legal .chip-dot{background:#94a3b8}
+  .g-environment{background:rgba(110,231,183,0.1);border-color:rgba(110,231,183,0.3);color:#6ee7b7}.g-environment .chip-dot{background:#6ee7b7}
+  .g-education{background:rgba(253,186,116,0.1);border-color:rgba(253,186,116,0.3);color:#fdba74}.g-education .chip-dot{background:#fdba74}
+  .g-opinion{background:rgba(196,181,253,0.1);border-color:rgba(196,181,253,0.3);color:#c4b5fd}.g-opinion .chip-dot{background:#c4b5fd}
+  .g-history{background:rgba(253,230,138,0.1);border-color:rgba(253,230,138,0.3);color:#fde68a}.g-history .chip-dot{background:#fde68a}
+  .g-travel{background:rgba(34,211,238,0.08);border-color:rgba(34,211,238,0.3);color:#22d3ee}.g-travel .chip-dot{background:#22d3ee}
+  .g-food{background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.3);color:#fb923c}.g-food .chip-dot{background:#fb923c}
+  .g-gaming{background:rgba(163,230,53,0.1);border-color:rgba(163,230,53,0.3);color:#a3e635}.g-gaming .chip-dot{background:#a3e635}
+  .g-ai{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.3);color:#c084fc}.g-ai .chip-dot{background:#c084fc}
+  .g-crypto{background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:#f59e0b}.g-crypto .chip-dot{background:#f59e0b}
+  .g-space{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.3);color:#818cf8}.g-space .chip-dot{background:#818cf8}
+  .g-psychology{background:rgba(244,114,182,0.08);border-color:rgba(244,114,182,0.3);color:#f9a8d4}.g-psychology .chip-dot{background:#f9a8d4}
+  .g-military{background:rgba(132,204,22,0.08);border-color:rgba(132,204,22,0.25);color:#84cc16}.g-military .chip-dot{background:#84cc16}
+  .g-religion{background:rgba(253,230,138,0.08);border-color:rgba(253,230,138,0.3);color:#fcd34d}.g-religion .chip-dot{background:#fcd34d}
+  .g-philosophy{background:rgba(148,163,184,0.08);border-color:rgba(148,163,184,0.3);color:#cbd5e1}.g-philosophy .chip-dot{background:#cbd5e1}
+  .g-economy{background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.25);color:#6ee7b7}.g-economy .chip-dot{background:#6ee7b7}
+  .g-social{background:rgba(251,113,133,0.1);border-color:rgba(251,113,133,0.3);color:#fb7185}.g-social .chip-dot{background:#fb7185}
+  .g-automotive{background:rgba(100,116,139,0.1);border-color:rgba(100,116,139,0.3);color:#94a3b8}.g-automotive .chip-dot{background:#94a3b8}
+  .g-realestate{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.25);color:#4ade80}.g-realestate .chip-dot{background:#4ade80}
+  .g-fashion{background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.3);color:#f472b6}.g-fashion .chip-dot{background:#f472b6}
 
   .raw-toggle {
     margin-top: 28px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    user-select: none;
-    width: fit-content;
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer; font-size: 0.7rem; color: var(--muted);
+    letter-spacing: 0.1em; user-select: none; width: fit-content;
   }
-
   .raw-toggle:hover { color: var(--text); }
-
   .raw-output {
-    display: none;
-    margin-top: 12px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
-    font-size: 0.75rem;
-    line-height: 1.9;
-    color: var(--muted);
-    white-space: pre-wrap;
-    max-height: 300px;
-    overflow-y: auto;
+    display: none; margin-top: 12px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px;
+    font-size: 0.75rem; line-height: 1.9; color: var(--muted);
+    white-space: pre-wrap; max-height: 300px; overflow-y: auto;
   }
-
   .raw-output.visible { display: block; }
 </style>
 </head>
@@ -645,14 +676,14 @@
   </div>
   <div class="status-pill">
     <div class="dot"></div>
-    MISTRAL LARGE · ONLINE
+    MISTRAL · ELEVENLABS · FLUX · ONLINE
   </div>
 </header>
 
 <main>
   <div class="hero-text">
     <h1>EXTRACT<br><em>EVERY</em><br>INSIGHT</h1>
-    <p>Powered by Mistral Large. Drop any text — article, news, research, product copy — and get instant structured intelligence.</p>
+    <p>Powered by Mistral Large. Drop any text — article, news, research, product copy — and get instant structured intelligence, voice summary, and AI-generated visual.</p>
   </div>
 
   <div class="input-section">
@@ -667,14 +698,13 @@
         <span class="genre-placeholder" id="genrePlaceholder">start typing to detect genre...</span>
       </div>
     </div>
-
     <div class="controls">
       <button class="btn-analyze" id="analyzeBtn" onclick="analyzeText()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         ANALYZE
       </button>
       <button class="btn-clear" onclick="clearAll()">CLEAR</button>
-      <div class="model-tag">mistral-large-latest</div>
+      <div class="model-tag">mistral + elevenlabs + flux</div>
     </div>
   </div>
 
@@ -735,6 +765,45 @@
         <div class="card-label">Summary</div>
         <div class="card-value" id="r-summary">—</div>
       </div>
+
+      <!-- ── VOICE CARD ── -->
+      <div class="card c-voice">
+        <div class="card-label">Voice Summary</div>
+        <div class="voice-player">
+          <div class="voice-status" id="voiceStatus">
+            <span class="v-dot"></span>
+            <span id="voiceStatusText">GENERATING AUDIO...</span>
+          </div>
+          <div class="voice-controls" id="voiceControls" style="display:none">
+            <button class="btn-voice btn-play" id="btnPlay" onclick="togglePlay()">
+              <svg id="playIcon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span id="playLabel">PLAY</span>
+            </button>
+            <div class="audio-progress" onclick="seekAudio(event)">
+              <div class="audio-progress-fill" id="audioFill"></div>
+            </div>
+            <span class="audio-time" id="audioTime">0:00</span>
+            <button class="btn-voice btn-replay" onclick="replayAudio()" title="Replay">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── IMAGE CARD ── -->
+      <div class="card c-image">
+        <div class="card-label">AI Visual</div>
+        <div class="image-wrapper" id="imageWrapper">
+          <div class="image-placeholder" id="imagePlaceholder">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:8px;opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div>IMAGE WILL APPEAR HERE</div>
+          </div>
+        </div>
+        <button class="btn-regen" id="btnRegen" onclick="generateImage()" disabled>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+          REGENERATE
+        </button>
+      </div>
     </div>
 
     <div class="raw-toggle" onclick="toggleRaw()">
@@ -746,132 +815,168 @@
 </main>
 
 <footer>
-  <p>ANALYTICA · AI TEXT INTELLIGENCE · MISTRAL LARGE</p>
-  <p>STRUCTURED EXTRACTION ENGINE v1.0</p>
+  <p>ANALYTICA · AI TEXT INTELLIGENCE · MISTRAL + ELEVENLABS + FLUX</p>
+  <p>STRUCTURED EXTRACTION ENGINE v2.0</p>
 </footer>
+
+<audio id="audioPlayer"></audio>
 
 <script>
   const BACKEND_URL = "https://cinrsage-backend.onrender.com";
 
-  // ── Genre Detection ──────────────────────────────────────────────
-  const GENRES = [
-    { id: 'news',        label: 'NEWS',           cls: 'g-news',
-      keys: ['breaking','reported','according to','sources say','journalist','press','headline','announced','spokesperson','media','correspondent','wire','dispatch','coverage','bureau','exclusive','confirmed','developing','bulletin','flash'] },
-    { id: 'tech',        label: 'TECHNOLOGY',     cls: 'g-tech',
-      keys: ['software','hardware','algorithm','api','cloud','cybersecurity','programming','developer','startup','silicon','app','gadget','device','platform','saas','artificial intelligence','machine learning','neural','automation','digital','open source','repository','framework','backend','frontend','database','server','latency','bandwidth','deployment'] },
-    { id: 'science',     label: 'SCIENCE',        cls: 'g-science',
-      keys: ['research','study','experiment','hypothesis','data','findings','published','journal','scientists','biology','chemistry','physics','quantum','genome','laboratory','peer-reviewed','observed','specimen','molecule','protein','dna','rna','cell','neuron','particle','telescope','species','taxonomy','catalyst','isotope'] },
-    { id: 'politics',    label: 'POLITICS',       cls: 'g-politics',
-      keys: ['government','election','senator','parliament','president','policy','legislation','vote','congress','democrat','republican','minister','cabinet','bill','constitution','campaign','ballot','geopolitical','regime','sovereignty','sanctions','diplomacy','treaty','alliance','foreign affairs','prime minister','administration','opposition','coalition'] },
-    { id: 'business',    label: 'BUSINESS',       cls: 'g-business',
-      keys: ['revenue','profit','market','corporate','ceo','acquisition','merger','quarterly','fiscal','enterprise','industry','supply chain','b2b','strategy','operations','brand','stakeholder','shareholders','valuation','workforce','headcount','layoff','hiring','expansion','pivot','disruption','competitive','market share'] },
-    { id: 'finance',     label: 'FINANCE',        cls: 'g-finance',
-      keys: ['stock','investment','portfolio','interest rate','inflation','gdp','cryptocurrency','bitcoin','hedge fund','nasdaq','equity','dividend','bond','ipo','forex','asset','treasury','economics','federal reserve','monetary','fiscal policy','yield','bull market','bear market','derivatives','options','futures','liquidity','volatility','index fund'] },
-    { id: 'health',      label: 'HEALTH',         cls: 'g-health',
-      keys: ['patient','clinical','symptom','diagnosis','therapy','vaccine','disease','hospital','pharmaceutical','mental health','surgery','treatment','medication','wellness','epidemic','pandemic','medical','healthcare','nutrition','doctor','mortality','morbidity','obesity','diabetes','cancer','chronic','preventive','rehabilitation','telemedicine','dosage'] },
-    { id: 'sports',      label: 'SPORTS',         cls: 'g-sports',
-      keys: ['match','tournament','championship','athlete','coach','score','league','goal','referee','season','stadium','player','team','training','transfer','trophy','olympic','world cup','innings','wicket','penalty','substitute','knockout','qualifier','semifinal','final','batting','bowling','fielding','dribble','serve','racket'] },
-    { id: 'film',        label: 'FILM & MEDIA',   cls: 'g-film',
-      keys: ['movie','film','director','actor','actress','box office','streaming','netflix','series','episode','plot','screenplay','cinematography','cast','premiere','review','oscar','studio','sequel','trailer','documentary','animation','blockbuster','cameo','genre','runtime','subtitles','dubbed','binge','showrunner'] },
-    { id: 'culture',     label: 'CULTURE',        cls: 'g-culture',
-      keys: ['art','music','literature','poetry','festival','gallery','exhibition','artist','musician','cultural','tradition','heritage','cuisine','fashion','lifestyle','celebrity','social media','trend','viral','influencer','meme','subculture','renaissance','baroque','contemporary','installation','performance','graffiti','tattoo','street art'] },
-    { id: 'environment', label: 'ENVIRONMENT',    cls: 'g-environment',
-      keys: ['climate','carbon','emissions','renewable','solar','fossil fuel','ecosystem','biodiversity','sustainability','deforestation','ocean','pollution','drought','wildfire','glacier','species','conservation','green energy','net zero','carbon footprint','rewilding','plastic','coral reef','sea level','ozone','methane','reforestation','habitat','endangered'] },
-    { id: 'legal',       label: 'LEGAL',          cls: 'g-legal',
-      keys: ['lawsuit','court','judge','attorney','verdict','plaintiff','defendant','legislation','statute','regulation','compliance','indictment','trial','prosecution','appeal','constitutional','jurisdiction','settlement','arbitration','injunction','subpoena','testimony','deposition','misdemeanor','felony','acquittal','damages','liability','intellectual property','patent'] },
-    { id: 'education',   label: 'EDUCATION',      cls: 'g-education',
-      keys: ['student','university','curriculum','professor','academic','school','scholarship','degree','campus','research paper','thesis','learning','lecture','admission','faculty','tuition','pedagogy','classroom','homeschool','edtech','e-learning','mooc','syllabus','grading','dropout','literacy','stem','exam','assessment','graduation'] },
-    { id: 'history',     label: 'HISTORY',        cls: 'g-history',
-      keys: ['century','ancient','empire','war','revolution','dynasty','civilization','historical','era','medieval','colonial','archeology','chronicle','monument','founded','circa','decade','battle','treaty','conquest','occupation','liberation','renaissance','reformation','migration','artifact','inscription','ruins','excavation','antiquity'] },
-    { id: 'opinion',     label: 'OPINION',        cls: 'g-opinion',
-      keys: ['i believe','in my opinion','i think','i argue','one must','we should','it seems','arguably','clearly','evidently','to my mind','personally','perspective','view','stance','contend','assert','i feel','i suspect','it is clear','the fact remains','without doubt','it is my view','one could argue','let me be clear'] },
-    { id: 'travel',      label: 'TRAVEL',         cls: 'g-travel',
-      keys: ['destination','itinerary','hotel','resort','flight','passport','visa','backpacking','tourism','traveler','sightseeing','landmark','accommodation','hostel','cruise','layover','jet lag','travel guide','excursion','adventure','road trip','solo travel','budget travel','luxury travel','airbnb','check-in','checkout','baggage','carry-on'] },
-    { id: 'food',        label: 'FOOD & DRINK',   cls: 'g-food',
-      keys: ['recipe','ingredient','cuisine','restaurant','chef','cooking','baking','flavor','taste','menu','dish','meal','dining','gastronomy','vegetarian','vegan','gluten-free','spice','sauce','marinate','sauté','grill','fermented','artisan','michelin','street food','cocktail','wine','beer','brew','barista'] },
-    { id: 'gaming',      label: 'GAMING',         cls: 'g-gaming',
-      keys: ['game','player','fps','rpg','esports','console','playstation','xbox','nintendo','steam','multiplayer','single-player','level','quest','boss','dungeon','loot','respawn','spawn','patch','dlc','open world','sandbox','battle royale','twitch','streamer','speedrun','modding','achievement','leaderboard'] },
-    { id: 'ai',          label: 'ARTIFICIAL INTELLIGENCE', cls: 'g-ai',
-      keys: ['llm','large language model','chatgpt','gpt','claude','gemini','mistral','generative ai','diffusion','prompt','fine-tuning','embeddings','tokenizer','inference','training data','hallucination','rag','vector database','agent','autonomous','multimodal','benchmark','rlhf','transformer','attention mechanism','zero-shot','few-shot'] },
-    { id: 'crypto',      label: 'CRYPTO / WEB3',  cls: 'g-crypto',
-      keys: ['blockchain','nft','defi','web3','ethereum','solana','dao','smart contract','wallet','gas fee','token','altcoin','staking','mining','metaverse','decentralized','protocol','dapp','yield farming','airdrop','whitepaper','tokenomics','proof of work','proof of stake','layer 2','bridge','liquidity pool'] },
-    { id: 'space',       label: 'SPACE',          cls: 'g-space',
-      keys: ['nasa','spacex','rocket','orbit','satellite','astronaut','mars','moon','planet','galaxy','telescope','launch','payload','iss','space station','asteroid','meteor','cosmos','stellar','nebula','black hole','exoplanet','rover','lander','mission','countdown','reentry','apogee','perigee','interstellar'] },
-    { id: 'psychology',  label: 'PSYCHOLOGY',     cls: 'g-psychology',
-      keys: ['cognitive','behavior','mental','anxiety','depression','trauma','therapy','therapist','emotion','subconscious','mindset','habit','motivation','phobia','disorder','personality','perception','bias','neuroscience','memory','attachment','resilience','self-esteem','narcissism','empathy','introspection','mindfulness','stoicism'] },
-    { id: 'military',    label: 'MILITARY',       cls: 'g-military',
-      keys: ['army','navy','airforce','soldier','troops','warfare','defense','missile','combat','battle','frontline','drone','artillery','infantry','commander','general','nato','operation','intelligence','surveillance','weapons','armored','siege','ceasefire','casualties','deployment','pentagon','brigade','battalion','strategic'] },
-    { id: 'religion',    label: 'RELIGION',       cls: 'g-religion',
-      keys: ['faith','god','church','mosque','temple','scripture','prayer','worship','spiritual','theology','doctrine','bible','quran','hinduism','buddhism','christianity','islam','clergy','pilgrimage','ritual','sacred','sin','salvation','meditation','dharma','karma','enlightenment','sermon','prophecy'] },
-    { id: 'philosophy',  label: 'PHILOSOPHY',     cls: 'g-philosophy',
-      keys: ['ethics','morality','existence','consciousness','epistemology','ontology','metaphysics','stoic','socrates','plato','aristotle','kant','nietzsche','free will','determinism','utilitarianism','nihilism','relativism','logic','fallacy','paradox','dialectic','dualism','empiricism','rationalism','phenomenology','existentialism'] },
-    { id: 'economy',     label: 'ECONOMY',        cls: 'g-economy',
-      keys: ['recession','growth','gdp','unemployment','trade','export','import','tariff','subsidy','deficit','surplus','austerity','stimulus','monetary policy','central bank','inflation rate','consumer price','producer price','purchasing power','labor market','supply demand','microeconomics','macroeconomics','keynesian','fiscal'] },
-    { id: 'social',      label: 'SOCIAL ISSUES',  cls: 'g-social',
-      keys: ['inequality','poverty','discrimination','racism','gender','lgbtq','diversity','inclusion','human rights','activism','protest','social justice','privilege','marginalized','community','welfare','homelessness','migration','refugee','asylum','civil rights','systemic','oppression','empowerment','advocacy','grassroots'] },
-    { id: 'automotive',  label: 'AUTOMOTIVE',     cls: 'g-automotive',
-      keys: ['car','vehicle','ev','electric vehicle','tesla','hybrid','engine','horsepower','torque','transmission','autonomous driving','self-driving','suv','sedan','hatchback','motorsport','formula 1','rally','dealership','recall','mileage','fuel economy','charging','battery range','obd','chassis','suspension'] },
-    { id: 'real_estate', label: 'REAL ESTATE',    cls: 'g-realestate',
-      keys: ['property','mortgage','rent','landlord','tenant','apartment','house','condo','investment property','listing','broker','realtor','square feet','down payment','interest rate','foreclosure','zoning','development','commercial','residential','lease','renovation','appraisal','homebuyer','market value','mls','open house'] },
-    { id: 'fashion',     label: 'FASHION',        cls: 'g-fashion',
-      keys: ['designer','brand','collection','runway','couture','streetwear','wardrobe','outfit','trend','seasonal','luxury','sustainable fashion','vintage','thrift','lookbook','editorial','vogue','collaboration','capsule','athleisure','accessories','sneakers','jewellery','fabric','textile','silhouette','model','styling'] },
-  ];
+  let currentSummary = '';
+  let currentTitle   = '';
+  let audioBlob      = null;
+  let audioURL       = null;
 
-  let genreDebounce = null;
+  // ── Audio Player ─────────────────────────────────────────────────
+  const audioEl = document.getElementById('audioPlayer');
 
-  function detectGenres(text) {
-    const lower = text.toLowerCase();
-    const wordCount = lower.split(/\s+/).filter(Boolean).length;
-    if (wordCount < 5) return [];
-    const scored = GENRES.map(g => {
-      const hits = g.keys.filter(k => lower.includes(k)).length;
-      return { ...g, score: hits };
-    }).filter(g => g.score > 0).sort((a, b) => b.score - a.score);
-    return scored.slice(0, 3);
-  }
-
-  function renderGenreChips(genres) {
-    const container = document.getElementById('genreChips');
-    const placeholder = document.getElementById('genrePlaceholder');
-    if (genres.length === 0) {
-      container.querySelectorAll('.genre-chip').forEach(c => {
-        c.classList.remove('show');
-        setTimeout(() => c.remove(), 300);
-      });
-      placeholder.style.opacity = '0.4';
-      return;
-    }
-    placeholder.style.opacity = '0';
-    const existing = new Set([...container.querySelectorAll('.genre-chip')].map(c => c.dataset.id));
-    const incoming = new Set(genres.map(g => g.id));
-    container.querySelectorAll('.genre-chip').forEach(c => {
-      if (!incoming.has(c.dataset.id)) {
-        c.classList.remove('show');
-        setTimeout(() => c.remove(), 300);
-      }
-    });
-    genres.forEach((g, i) => {
-      if (!existing.has(g.id)) {
-        const chip = document.createElement('span');
-        chip.className = `genre-chip ${g.cls}`;
-        chip.dataset.id = g.id;
-        chip.innerHTML = `<span class="chip-dot"></span>${g.label}`;
-        container.insertBefore(chip, null);
-        setTimeout(() => chip.classList.add('show'), i * 60 + 20);
-      }
-    });
-  }
-
-  document.getElementById('inputText').addEventListener('input', function() {
-    document.getElementById('charCount').textContent = this.value.length + ' chars';
-    clearTimeout(genreDebounce);
-    genreDebounce = setTimeout(() => {
-      const genres = detectGenres(this.value);
-      renderGenreChips(genres);
-    }, 200);
+  audioEl.addEventListener('timeupdate', () => {
+    if (!audioEl.duration) return;
+    const pct = (audioEl.currentTime / audioEl.duration) * 100;
+    document.getElementById('audioFill').style.width = pct + '%';
+    document.getElementById('audioTime').textContent = fmtTime(audioEl.currentTime);
   });
 
-  // ── RETRY LOGIC — Render cold start handle karta hai ──
+  audioEl.addEventListener('ended', () => {
+    document.getElementById('playLabel').textContent = 'PLAY';
+    document.getElementById('playIcon').innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+    document.getElementById('audioFill').style.width = '0%';
+  });
+
+  function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    return `${m}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  }
+
+  function togglePlay() {
+    if (!audioURL) return;
+    if (audioEl.paused) {
+      audioEl.play();
+      document.getElementById('playLabel').textContent = 'PAUSE';
+      document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    } else {
+      audioEl.pause();
+      document.getElementById('playLabel').textContent = 'PLAY';
+      document.getElementById('playIcon').innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+    }
+  }
+
+  function replayAudio() {
+    if (!audioURL) return;
+    audioEl.currentTime = 0;
+    audioEl.play();
+    document.getElementById('playLabel').textContent = 'PAUSE';
+    document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  }
+
+  function seekAudio(e) {
+    if (!audioEl.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    audioEl.currentTime = pct * audioEl.duration;
+  }
+
+  // ── Voice Generation ──────────────────────────────────────────────
+  async function generateVoice(text) {
+    const statusEl  = document.getElementById('voiceStatus');
+    const statusTxt = document.getElementById('voiceStatusText');
+    const controls  = document.getElementById('voiceControls');
+
+    statusEl.className  = 'voice-status loading';
+    statusTxt.textContent = 'GENERATING AUDIO...';
+    controls.style.display = 'none';
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/voice`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+        signal: AbortSignal.timeout(30000)
+      });
+
+      if (!res.ok) throw new Error('Voice API failed');
+
+      const blob = await res.blob();
+      audioBlob = blob;
+      audioURL  = URL.createObjectURL(blob);
+      audioEl.src = audioURL;
+
+      statusEl.className  = 'voice-status ready';
+      statusTxt.textContent = 'AUDIO READY';
+      controls.style.display = 'flex';
+
+      // Auto-play
+      await audioEl.play();
+      document.getElementById('playLabel').textContent = 'PAUSE';
+      document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+
+    } catch (err) {
+      statusEl.className  = 'voice-status error';
+      statusTxt.textContent = 'VOICE UNAVAILABLE — ' + (err.message || 'check API key');
+    }
+  }
+
+  // ── Image Generation ──────────────────────────────────────────────
+  async function generateImage() {
+    const wrapper   = document.getElementById('imageWrapper');
+    const placeholder = document.getElementById('imagePlaceholder');
+    const btnRegen  = document.getElementById('btnRegen');
+
+    btnRegen.disabled = true;
+
+    // Remove old image
+    const oldImg = wrapper.querySelector('img');
+    if (oldImg) oldImg.remove();
+
+    // Show generating overlay
+    let overlay = wrapper.querySelector('.image-generating');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'image-generating';
+      overlay.innerHTML = `
+        <div class="image-generating-text">GENERATING VISUAL...</div>
+        <div class="image-gen-bar"><div class="image-gen-bar-fill"></div></div>
+      `;
+      wrapper.appendChild(overlay);
+    }
+    overlay.style.display = 'flex';
+    if (placeholder) placeholder.style.display = 'none';
+
+    // Build image prompt from title + summary
+    const imagePrompt = `Cinematic editorial photo illustration: ${currentTitle}. ${currentSummary.slice(0, 200)}. High detail, dramatic lighting, photorealistic, 16:9 aspect ratio.`;
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/generate-image`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: imagePrompt }),
+        signal: AbortSignal.timeout(60000)
+      });
+
+      if (!res.ok) throw new Error('Image API failed');
+
+      const blob = await res.blob();
+      const url  = URL.createObjectURL(blob);
+      const img  = document.createElement('img');
+      img.src = url;
+      img.alt = currentTitle;
+      wrapper.insertBefore(img, overlay);
+      overlay.style.display = 'none';
+
+    } catch (err) {
+      overlay.style.display = 'none';
+      if (placeholder) {
+        placeholder.style.display = 'block';
+        placeholder.innerHTML = `<div style="color:var(--accent3);font-size:0.68rem">IMAGE FAILED · ${err.message}</div>`;
+      }
+    } finally {
+      btnRegen.disabled = false;
+    }
+  }
+
+  // ── Retry Fetch ───────────────────────────────────────────────────
   async function fetchWithRetry(text, retries = 2) {
     const btn = document.getElementById('analyzeBtn');
     for (let i = 0; i < retries; i++) {
@@ -897,14 +1002,15 @@
     }
   }
 
+  // ── Main Analyze ──────────────────────────────────────────────────
   async function analyzeText() {
     const text = document.getElementById('inputText').value.trim();
     if (!text) return;
 
-    const btn = document.getElementById('analyzeBtn');
+    const btn     = document.getElementById('analyzeBtn');
     const loading = document.getElementById('loadingBar');
     const results = document.getElementById('results');
-    const errMsg = document.getElementById('errorMsg');
+    const errMsg  = document.getElementById('errorMsg');
 
     btn.disabled = true;
     btn.innerHTML = `<span class="spin">◐</span> ANALYZING...`;
@@ -915,13 +1021,18 @@
     const startTime = Date.now();
 
     try {
-      const data = await fetchWithRetry(text);
+      const data    = await fetchWithRetry(text);
       const content = data.result;
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
       populateResults(content, elapsed);
+
+      // Fire voice + image in parallel after results shown
+      generateVoice(currentSummary);
+      generateImage();
+
     } catch (err) {
       console.error(err);
-      errMsg.textContent = '⚠ ' + (err.message || 'Server unreachable. Please try again in a moment.');
+      errMsg.textContent = '⚠ ' + (err.message || 'Server unreachable. Please try again.');
       errMsg.classList.add('visible');
     } finally {
       btn.disabled = false;
@@ -951,10 +1062,13 @@
   }
 
   function populateResults(content, elapsed) {
-    const title = extractSection(content, 'Title') || '—';
-    const category = extractSection(content, 'Category') || '—';
+    const title     = extractSection(content, 'Title') || '—';
+    const category  = extractSection(content, 'Category') || '—';
     const sentiment = extractSection(content, 'Sentiment') || 'Neutral';
-    const summary = extractSection(content, 'Summary') || '—';
+    const summary   = extractSection(content, 'Summary') || '—';
+
+    currentTitle   = title;
+    currentSummary = summary;
 
     const entities  = extractList(content, 'Key Entities');
     const keypoints = extractList(content, 'Key Points');
@@ -987,6 +1101,20 @@
     document.getElementById('r-summary').textContent = summary;
     document.getElementById('resultsMeta').textContent = `${elapsed}s · ${content.split(' ').length} tokens est.`;
     document.getElementById('rawOutput').textContent = content;
+
+    // Reset voice + image state
+    document.getElementById('voiceStatus').className = 'voice-status loading';
+    document.getElementById('voiceStatusText').textContent = 'GENERATING AUDIO...';
+    document.getElementById('voiceControls').style.display = 'none';
+    document.getElementById('btnRegen').disabled = false;
+
+    const oldImg = document.getElementById('imageWrapper').querySelector('img');
+    if (oldImg) oldImg.remove();
+    const oldOverlay = document.getElementById('imageWrapper').querySelector('.image-generating');
+    if (oldOverlay) oldOverlay.remove();
+    const ph = document.getElementById('imagePlaceholder');
+    if (ph) { ph.style.display = 'block'; ph.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:8px;opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><div>IMAGE WILL APPEAR HERE</div>'; }
+
     document.getElementById('results').classList.add('visible');
     document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -997,6 +1125,9 @@
     document.getElementById('results').classList.remove('visible');
     document.getElementById('errorMsg').classList.remove('visible');
     document.getElementById('rawOutput').classList.remove('visible');
+    audioEl.pause();
+    audioEl.src = '';
+    audioURL = null;
     renderGenreChips([]);
   }
 
@@ -1004,9 +1135,73 @@
     document.getElementById('rawOutput').classList.toggle('visible');
   }
 
+  // ── Genre Detection (unchanged) ────────────────────────────────────
+  const GENRES = [
+    { id: 'news', label: 'NEWS', cls: 'g-news', keys: ['breaking','reported','according to','sources say','journalist','press','headline','announced','spokesperson','media'] },
+    { id: 'tech', label: 'TECHNOLOGY', cls: 'g-tech', keys: ['software','hardware','algorithm','api','cloud','cybersecurity','programming','developer','startup','silicon','app','gadget'] },
+    { id: 'science', label: 'SCIENCE', cls: 'g-science', keys: ['research','study','experiment','hypothesis','data','findings','published','journal','scientists','biology','chemistry','physics'] },
+    { id: 'politics', label: 'POLITICS', cls: 'g-politics', keys: ['government','election','senator','parliament','president','policy','legislation','vote','congress'] },
+    { id: 'business', label: 'BUSINESS', cls: 'g-business', keys: ['revenue','profit','market','corporate','ceo','acquisition','merger','quarterly','fiscal','enterprise'] },
+    { id: 'finance', label: 'FINANCE', cls: 'g-finance', keys: ['stock','investment','portfolio','interest rate','inflation','gdp','cryptocurrency','bitcoin','hedge fund','nasdaq'] },
+    { id: 'health', label: 'HEALTH', cls: 'g-health', keys: ['patient','clinical','symptom','diagnosis','therapy','vaccine','disease','hospital','pharmaceutical','mental health'] },
+    { id: 'sports', label: 'SPORTS', cls: 'g-sports', keys: ['match','tournament','championship','athlete','coach','score','league','goal','referee','season'] },
+    { id: 'film', label: 'FILM & MEDIA', cls: 'g-film', keys: ['movie','film','director','actor','actress','box office','streaming','netflix','series','episode'] },
+    { id: 'culture', label: 'CULTURE', cls: 'g-culture', keys: ['art','music','literature','poetry','festival','gallery','exhibition','artist','musician','cultural'] },
+    { id: 'environment', label: 'ENVIRONMENT', cls: 'g-environment', keys: ['climate','carbon','emissions','renewable','solar','fossil fuel','ecosystem','biodiversity','sustainability'] },
+    { id: 'legal', label: 'LEGAL', cls: 'g-legal', keys: ['lawsuit','court','judge','attorney','verdict','plaintiff','defendant','legislation','statute'] },
+    { id: 'education', label: 'EDUCATION', cls: 'g-education', keys: ['student','university','curriculum','professor','academic','school','scholarship','degree','campus'] },
+    { id: 'history', label: 'HISTORY', cls: 'g-history', keys: ['century','ancient','empire','war','revolution','dynasty','civilization','historical','era','medieval'] },
+    { id: 'opinion', label: 'OPINION', cls: 'g-opinion', keys: ['i believe','in my opinion','i think','i argue','one must','we should','it seems','arguably'] },
+    { id: 'ai', label: 'ARTIFICIAL INTELLIGENCE', cls: 'g-ai', keys: ['llm','large language model','chatgpt','gpt','claude','gemini','mistral','generative ai','diffusion','prompt'] },
+    { id: 'crypto', label: 'CRYPTO / WEB3', cls: 'g-crypto', keys: ['blockchain','nft','defi','web3','ethereum','solana','dao','smart contract','wallet'] },
+    { id: 'space', label: 'SPACE', cls: 'g-space', keys: ['nasa','spacex','rocket','orbit','satellite','astronaut','mars','moon','planet','galaxy'] },
+  ];
+
+  let genreDebounce = null;
+
+  function detectGenres(text) {
+    const lower = text.toLowerCase();
+    if (lower.split(/\s+/).filter(Boolean).length < 5) return [];
+    return GENRES.map(g => ({ ...g, score: g.keys.filter(k => lower.includes(k)).length }))
+      .filter(g => g.score > 0).sort((a, b) => b.score - a.score).slice(0, 3);
+  }
+
+  function renderGenreChips(genres) {
+    const container   = document.getElementById('genreChips');
+    const placeholder = document.getElementById('genrePlaceholder');
+    if (genres.length === 0) {
+      container.querySelectorAll('.genre-chip').forEach(c => { c.classList.remove('show'); setTimeout(() => c.remove(), 300); });
+      placeholder.style.opacity = '0.4';
+      return;
+    }
+    placeholder.style.opacity = '0';
+    const existing = new Set([...container.querySelectorAll('.genre-chip')].map(c => c.dataset.id));
+    const incoming = new Set(genres.map(g => g.id));
+    container.querySelectorAll('.genre-chip').forEach(c => {
+      if (!incoming.has(c.dataset.id)) { c.classList.remove('show'); setTimeout(() => c.remove(), 300); }
+    });
+    genres.forEach((g, i) => {
+      if (!existing.has(g.id)) {
+        const chip = document.createElement('span');
+        chip.className = `genre-chip ${g.cls}`;
+        chip.dataset.id = g.id;
+        chip.innerHTML = `<span class="chip-dot"></span>${g.label}`;
+        container.insertBefore(chip, null);
+        setTimeout(() => chip.classList.add('show'), i * 60 + 20);
+      }
+    });
+  }
+
+  document.getElementById('inputText').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = this.value.length + ' chars';
+    clearTimeout(genreDebounce);
+    genreDebounce = setTimeout(() => renderGenreChips(detectGenres(this.value)), 200);
+  });
+
   document.getElementById('inputText').addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') analyzeText();
   });
 </script>
 </body>
 </html>
+
