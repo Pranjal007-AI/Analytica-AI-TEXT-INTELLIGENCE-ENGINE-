@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANALYTICA — AI Text Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #252535;
+    --accent: #c8f562;
+    --accent2: #7b61ff;
+    --accent3: #ff6b35;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --glow: rgba(200,245,98,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(200,245,98,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,245,98,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -20%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(ellipse, rgba(123,97,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(5%, 10%) rotate(5deg); }
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-shadow: 0 0 40px var(--glow);
+  }
+
+  .logo span {
+    color: var(--muted);
+    font-size: 0.75rem;
+    display: block;
+    letter-spacing: 0.3em;
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    margin-top: -4px;
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .status-pill .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Main layout */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 48px 48px 80px;
+  }
+
+  .hero-text {
+    margin-bottom: 48px;
+  }
+
+  .hero-text h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+
+  .hero-text h1 em {
+    font-style: normal;
+    color: var(--accent);
+    text-shadow: 0 0 60px rgba(200,245,98,0.4);
+  }
+
+  .hero-text p {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    max-width: 500px;
+    line-height: 1.8;
+  }
+
+  /* Input Section */
+  .input-section {
+    margin-bottom: 40px;
+  }
+
+  .input-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .textarea-wrapper {
+    position: relative;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 180px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  textarea:focus {
+    border-color: rgba(200,245,98,0.4);
+    box-shadow: 0 0 0 1px rgba(200,245,98,0.1), 0 0 40px rgba(200,245,98,0.05);
+  }
+
+  textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  .char-count {
+    position: absolute;
+    bottom: 14px;
+    right: 16px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    align-items: center;
+  }
+
+  .btn-analyze {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: #0a0a0f;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+
+  .btn-analyze:hover {
+    background: #d4ff6e;
+    box-shadow: 0 0 40px rgba(200,245,98,0.3);
+    transform: translateY(-1px);
+  }
+
+  .btn-analyze:active { transform: translateY(0); }
+
+  .btn-analyze:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-clear {
+    padding: 14px 20px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .btn-clear:hover {
+    border-color: var(--accent3);
+    color: var(--accent3);
+  }
+
+  .model-tag {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 6px;
+  }
+
+  /* Loading */
+  .loading-bar {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 24px 0;
+    overflow: hidden;
+    display: none;
+  }
+
+  .loading-bar.active { display: block; }
+
+  .loading-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent2));
+    background-size: 200% 100%;
+    animation: loading 1.5s linear infinite;
+    width: 100%;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Results */
+  .results {
+    display: none;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .results.visible { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .results-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  .results-meta {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* Grid layout for cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+
+  /* Card base */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .card:hover { border-color: rgba(200,245,98,0.2); }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,245,98,0.15), transparent);
+  }
+
+  .card-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-label::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .card-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  /* Specific card sizes */
+  .c-title { grid-column: span 8; }
+  .c-category { grid-column: span 4; }
+  .c-sentiment { grid-column: span 4; }
+  .c-entities { grid-column: span 4; }
+  .c-keypoints { grid-column: span 4; }
+  .c-data { grid-column: span 6; }
+  .c-timeline { grid-column: span 6; }
+  .c-insights { grid-column: span 7; }
+  .c-summary { grid-column: span 12; }
+
+  /* List inside cards */
+  .card-list {
+    list-style: none;
+    margin-top: 4px;
+  }
+
+  .card-list li {
+    font-size: 0.8rem;
+    color: var(--text);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .card-list li:last-child { border-bottom: none; }
+
+  .card-list li::before {
+    content: '›';
+    color: var(--accent);
+    font-size: 1rem;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+
+  /* Sentiment display */
+  .sentiment-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .sentiment-positive {
+    background: rgba(200,245,98,0.1);
+    border: 1px solid rgba(200,245,98,0.25);
+    color: var(--accent);
+  }
+
+  .sentiment-neutral {
+    background: rgba(123,97,255,0.1);
+    border: 1px solid rgba(123,97,255,0.25);
+    color: var(--accent2);
+  }
+
+  .sentiment-negative {
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.25);
+    color: var(--accent3);
+  }
+
+  /* Summary card */
+  .c-summary .card-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--text);
+    opacity: 0.9;
+    border-left: 2px solid var(--accent);
+    padding-left: 20px;
+    margin-top: 6px;
+  }
+
+  /* Category badge */
+  .category-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(123,97,255,0.1);
+    border: 1px solid rgba(123,97,255,0.3);
+    border-radius: 6px;
+    color: var(--accent2);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+
+  /* Insights card */
+  .c-insights .card-list li::before {
+    content: '✦';
+    color: var(--accent3);
+    font-size: 0.7rem;
+  }
+
+  /* Error state */
+  .error-msg {
+    display: none;
+    padding: 16px 20px;
+    background: rgba(255,107,53,0.08);
+    border: 1px solid rgba(255,107,53,0.25);
+    border-radius: 8px;
+    color: var(--accent3);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    margin-top: 16px;
+  }
+
+  .error-msg.visible { display: block; }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid var(--border);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer p {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    header, main, footer { padding-left: 24px; padding-right: 24px; }
+    .c-title, .c-category, .c-sentiment, .c-entities, .c-keypoints,
+    .c-data, .c-timeline, .c-insights, .c-summary { grid-column: span 12; }
+  }
+
+  /* Spinner icon */
+  .spin { animation: spin 1s linear infinite; display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Blinking cursor */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* Genre indicator */
+  .genre-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    min-height: 34px;
+  }
+
+  .genre-label-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .genre-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .genre-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 13px;
+    border-radius: 100px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    border: 1px solid;
+    opacity: 0;
+    transform: translateY(4px) scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+
+  .genre-chip.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: chipBlink 0.7s ease forwards;
+  }
+
+  @keyframes chipBlink {
+    0%   { box-shadow: none; }
+    25%  { box-shadow: 0 0 16px currentColor; }
+    50%  { box-shadow: none; }
+    75%  { box-shadow: 0 0 10px currentColor; }
+    100% { box-shadow: none; }
+  }
+
+  .genre-chip .chip-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Genre color themes */
+  .g-news       { background: rgba(200,245,98,0.08);  border-color: rgba(200,245,98,0.3);  color: #c8f562; }
+  .g-news       .chip-dot { background: #c8f562; }
+  .g-science    { background: rgba(123,97,255,0.1);   border-color: rgba(123,97,255,0.3);  color: #a08eff; }
+  .g-science    .chip-dot { background: #a08eff; }
+  .g-tech       { background: rgba(56,189,248,0.1);   border-color: rgba(56,189,248,0.3);  color: #38bdf8; }
+  .g-tech       .chip-dot { background: #38bdf8; }
+  .g-politics   { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
+  .g-politics   .chip-dot { background: #fb923c; }
+  .g-business   { background: rgba(52,211,153,0.1);   border-color: rgba(52,211,153,0.3);  color: #34d399; }
+  .g-business   .chip-dot { background: #34d399; }
+  .g-sports     { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #fbbf24; }
+  .g-sports     .chip-dot { background: #fbbf24; }
+  .g-health     { background: rgba(248,113,113,0.1);  border-color: rgba(248,113,113,0.3); color: #f87171; }
+  .g-health     .chip-dot { background: #f87171; }
+  .g-culture    { background: rgba(244,114,182,0.1);  border-color: rgba(244,114,182,0.3); color: #f472b6; }
+  .g-culture    .chip-dot { background: #f472b6; }
+  .g-film       { background: rgba(167,139,250,0.1);  border-color: rgba(167,139,250,0.3); color: #a78bfa; }
+  .g-film       .chip-dot { background: #a78bfa; }
+  .g-finance    { background: rgba(74,222,128,0.1);   border-color: rgba(74,222,128,0.3);  color: #4ade80; }
+  .g-finance    .chip-dot { background: #4ade80; }
+  .g-legal      { background: rgba(148,163,184,0.1);  border-color: rgba(148,163,184,0.3); color: #94a3b8; }
+  .g-legal      .chip-dot { background: #94a3b8; }
+  .g-environment{ background: rgba(110,231,183,0.1);  border-color: rgba(110,231,183,0.3); color: #6ee7b7; }
+  .g-environment .chip-dot { background: #6ee7b7; }
+  .g-education  { background: rgba(253,186,116,0.1);  border-color: rgba(253,186,116,0.3); color: #fdba74; }
+  .g-education  .chip-dot { background: #fdba74; }
+  .g-opinion    { background: rgba(196,181,253,0.1);  border-color: rgba(196,181,253,0.3); color: #c4b5fd; }
+  .g-opinion    .chip-dot { background: #c4b5fd; }
+  .g-history    { background: rgba(253,230,138,0.1);  border-color: rgba(253,230,138,0.3); color: #fde68a; }
+  .g-history    .chip-dot { background: #fde68a; }
+  .g-travel     { background: rgba(34,211,238,0.08);  border-color: rgba(34,211,238,0.3);  color: #22d3ee; }
+  .g-travel     .chip-dot { background: #22d3ee; }
+  .g-food       { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
+  .g-food       .chip-dot { background: #fb923c; }
+  .g-gaming     { background: rgba(163,230,53,0.1);   border-color: rgba(163,230,53,0.3);  color: #a3e635; }
+  .g-gaming     .chip-dot { background: #a3e635; }
+  .g-ai         { background: rgba(192,132,252,0.1);  border-color: rgba(192,132,252,0.3); color: #c084fc; }
+  .g-ai         .chip-dot { background: #c084fc; }
+  .g-crypto     { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #f59e0b; }
+  .g-crypto     .chip-dot { background: #f59e0b; }
+  .g-space      { background: rgba(99,102,241,0.1);   border-color: rgba(99,102,241,0.3);  color: #818cf8; }
+  .g-space      .chip-dot { background: #818cf8; }
+  .g-psychology { background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.3); color: #f9a8d4; }
+  .g-psychology .chip-dot { background: #f9a8d4; }
+  .g-military   { background: rgba(132,204,22,0.08);  border-color: rgba(132,204,22,0.25); color: #84cc16; }
+  .g-military   .chip-dot { background: #84cc16; }
+  .g-religion   { background: rgba(253,230,138,0.08); border-color: rgba(253,230,138,0.3); color: #fcd34d; }
+  .g-religion   .chip-dot { background: #fcd34d; }
+  .g-philosophy { background: rgba(148,163,184,0.08); border-color: rgba(148,163,184,0.3); color: #cbd5e1; }
+  .g-philosophy .chip-dot { background: #cbd5e1; }
+  .g-economy    { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25); color: #6ee7b7; }
+  .g-economy    .chip-dot { background: #6ee7b7; }
+  .g-social     { background: rgba(251,113,133,0.1);  border-color: rgba(251,113,133,0.3); color: #fb7185; }
+  .g-social     .chip-dot { background: #fb7185; }
+  .g-automotive { background: rgba(100,116,139,0.1);  border-color: rgba(100,116,139,0.3); color: #94a3b8; }
+  .g-automotive .chip-dot { background: #94a3b8; }
+  .g-realestate { background: rgba(34,197,94,0.08);   border-color: rgba(34,197,94,0.25);  color: #4ade80; }
+  .g-realestate .chip-dot { background: #4ade80; }
+  .g-fashion    { background: rgba(236,72,153,0.08);  border-color: rgba(236,72,153,0.3);  color: #f472b6; }
+  .g-fashion    .chip-dot { background: #f472b6; }
+
+  .genre-placeholder {
+    font-size: 0.68rem;
+    color: var(--muted);
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    font-style: italic;
+    transition: opacity 0.3s;
+  }
+
+  /* Raw output section */
+  .raw-toggle {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    user-select: none;
+    width: fit-content;
+  }
+
+  .raw-toggle:hover { color: var(--text); }
+
+  .raw-output {
+    display: none;
+    margin-top: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 0.75rem;
+    line-height: 1.9;
+    color: var(--muted);
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .raw-output.visible { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    ANALYTICA
+    <span>AI TEXT INTELLIGENCE ENGINE</span>
+  </div>
+  <div class="status-pill">
+    <div class="dot"></div>
+    MISTRAL LARGE · ONLINE
+  </div>
+</header>
+
+<main>
+  <div class="hero-text">
+    <h1>EXTRACT<br><em>EVERY</em><br>INSIGHT</h1>
+    <p>Powered by Mistral Large. Drop any text — article, news, research, product copy — and get instant structured intelligence.</p>
+  </div>
+
+  <!-- Input Section -->
+  <div class="input-section">
+    <div class="input-label">// INPUT TEXT</div>
+    <div class="textarea-wrapper">
+      <textarea id="inputText" placeholder="Paste your article, paragraph, news snippet, or any text here..." spellcheck="false"></textarea>
+      <div class="char-count" id="charCount">0 chars</div>
+    </div>
+    <!-- Live Genre Indicator -->
+    <div class="genre-indicator">
+      <div class="genre-label-tag">// GENRE</div>
+      <div class="genre-chips" id="genreChips">
+        <span class="genre-placeholder" id="genrePlaceholder">start typing to detect genre...</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-analyze" id="analyzeBtn" onclick="analyzeText()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        ANALYZE
+      </button>
+      <button class="btn-clear" onclick="clearAll()">CLEAR</button>
+      <div class="model-tag">mistral-large-latest</div>
+    </div>
+  </div>
+
+  <!-- Loading Bar -->
+  <div class="loading-bar" id="loadingBar">
+    <div class="loading-bar-inner"></div>
+  </div>
+
+  <!-- Error -->
+  <div class="error-msg" id="errorMsg"></div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="results-header">
+      <div class="results-title">// ANALYSIS COMPLETE</div>
+      <div class="results-meta" id="resultsMeta"></div>
+    </div>
+
+    <div class="cards-grid">
+      <!-- Title -->
+      <div class="card c-title">
+        <div class="card-label">Title</div>
+        <div class="card-value" id="r-title">—</div>
+      </div>
+
+      <!-- Category -->
+      <div class="card c-category">
+        <div class="card-label">Category</div>
+        <div id="r-category"><span class="category-badge">—</span></div>
+      </div>
+
+      <!-- Sentiment -->
+      <div class="card c-sentiment">
+        <div class="card-label">Sentiment</div>
+        <div id="r-sentiment"></div>
+      </div>
+
+      <!-- Key Entities -->
+      <div class="card c-entities">
+        <div class="card-label">Key Entities</div>
+        <ul class="card-list" id="r-entities"></ul>
+      </div>
+
+      <!-- Key Points -->
+      <div class="card c-keypoints">
+        <div class="card-label">Key Points</div>
+        <ul class="card-list" id="r-keypoints"></ul>
+      </div>
+
+      <!-- Important Data -->
+      <div class="card c-data">
+        <div class="card-label">Important Data</div>
+        <ul class="card-list" id="r-data"></ul>
+      </div>
+
+      <!-- Timeline -->
+      <div class="card c-timeline">
+        <div class="card-label">Timeline</div>
+        <ul class="card-list" id="r-timeline"></ul>
+      </div>
+
+      <!-- Insights -->
+      <div class="card c-insights">
+        <div class="card-label">Insights</div>
+        <ul class="card-list" id="r-insights"></ul>
+      </div>
+
+      <!-- Summary -->
+      <div class="card c-summary">
+        <div class="card-label">Summary</div>
+        <div class="card-value" id="r-summary">—</div>
+      </div>
+    </div>
+
+    <!-- Raw Output Toggle -->
+    <div class="raw-toggle" onclick="toggleRaw()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      VIEW RAW OUTPUT
+    </div>
+    <pre class="raw-output" id="rawOutput"></pre>
+  </div>
+</main>
+
+<footer>
+  <p>ANALYTICA · AI TEXT INTELLIGENCE · MISTRAL LARGE</p>
+  <p>STRUCTURED EXTRACTION ENGINE v1.0</p>
+</footer>
+
+<script>
+  // ── Backend URL — Render pe deploy hone ke baad yahan apna URL daalo ──
+  const BACKEND_URL = "https://cinrsage-backend.onrender.com";
+
+  const SYSTEM_PROMPT = `You are an expert AI assistant specialized in:
+- extracting key information
+- summarizing content clearly
+
+Your responses must be accurate, structured, and easy to read.
+
+Do not hallucinate.
+If information is missing, simply skip it.
+
+Think internally but do not show reasoning.`;
+
+  const USER_PROMPT_TEMPLATE = (text) => `Analyze the text below and produce a well-structured output.
+
+========================
+INPUT:
+${text}
+========================
+
+### Your Output Must Follow This Format:
+
+Title:
+<main topic or heading>
+
+Category:
+<type like Movie, Article, News, Product, etc.>
+
+Key Entities:
+- ...
+- ...
+- ...
+
+Key Points:
+- ...
+- ...
+- ...
+
+Important Data:
+- ...
+- ...
+
+Timeline (if any):
+- ...
+- ...
+
+Insights:
+- ...
+- ...
+
+Sentiment:
+<Positive / Neutral / Negative>
+
+Summary:
+<clear, concise paragraph under 120 words>
+
+---
+
+### Rules:
+- Keep it clean and readable
+- Do not add extra explanations
+- Do not repeat information
+- Be precise and factual`;
+
+  // ── Genre Detection ──────────────────────────────────────────────
+  const GENRES = [
+    { id: 'news',        label: 'NEWS',           cls: 'g-news',
+      keys: ['breaking','reported','according to','sources say','journalist','press','headline','announced','spokesperson','media','correspondent','wire','dispatch','coverage','bureau','exclusive','confirmed','developing','bulletin','flash'] },
+    { id: 'tech',        label: 'TECHNOLOGY',     cls: 'g-tech',
+      keys: ['software','hardware','algorithm','api','cloud','cybersecurity','programming','developer','startup','silicon','app','gadget','device','platform','saas','artificial intelligence','machine learning','neural','automation','digital','open source','repository','framework','backend','frontend','database','server','latency','bandwidth','deployment'] },
+    { id: 'science',     label: 'SCIENCE',        cls: 'g-science',
+      keys: ['research','study','experiment','hypothesis','data','findings','published','journal','scientists','biology','chemistry','physics','quantum','genome','laboratory','peer-reviewed','observed','specimen','molecule','protein','dna','rna','cell','neuron','particle','telescope','species','taxonomy','catalyst','isotope'] },
+    { id: 'politics',    label: 'POLITICS',       cls: 'g-politics',
+      keys: ['government','election','senator','parliament','president','policy','legislation','vote','congress','democrat','republican','minister','cabinet','bill','constitution','campaign','ballot','geopolitical','regime','sovereignty','sanctions','diplomacy','treaty','alliance','foreign affairs','prime minister','administration','opposition','coalition'] },
+    { id: 'business',    label: 'BUSINESS',       cls: 'g-business',
+      keys: ['revenue','profit','market','corporate','ceo','acquisition','merger','quarterly','fiscal','enterprise','industry','supply chain','b2b','strategy','operations','brand','stakeholder','shareholders','valuation','workforce','headcount','layoff','hiring','expansion','pivot','disruption','competitive','market share'] },
+    { id: 'finance',     label: 'FINANCE',        cls: 'g-finance',
+      keys: ['stock','investment','portfolio','interest rate','inflation','gdp','cryptocurrency','bitcoin','hedge fund','nasdaq','equity','dividend','bond','ipo','forex','asset','treasury','economics','federal reserve','monetary','fiscal policy','yield','bull market','bear market','derivatives','options','futures','liquidity','volatility','index fund'] },
+    { id: 'health',      label: 'HEALTH',         cls: 'g-health',
+      keys: ['patient','clinical','symptom','diagnosis','therapy','vaccine','disease','hospital','pharmaceutical','mental health','surgery','treatment','medication','wellness','epidemic','pandemic','medical','healthcare','nutrition','doctor','mortality','morbidity','obesity','diabetes','cancer','chronic','preventive','rehabilitation','telemedicine','dosage'] },
+    { id: 'sports',      label: 'SPORTS',         cls: 'g-sports',
+      keys: ['match','tournament','championship','athlete','coach','score','league','goal','referee','season','stadium','player','team','training','transfer','trophy','olympic','world cup','innings','wicket','penalty','substitute','knockout','qualifier','semifinal','final','batting','bowling','fielding','dribble','serve','racket'] },
+    { id: 'film',        label: 'FILM & MEDIA',   cls: 'g-film',
+      keys: ['movie','film','director','actor','actress','box office','streaming','netflix','series','episode','plot','screenplay','cinematography','cast','premiere','review','oscar','studio','sequel','trailer','documentary','animation','blockbuster','cameo','genre','runtime','subtitles','dubbed','binge','showrunner'] },
+    { id: 'culture',     label: 'CULTURE',        cls: 'g-culture',
+      keys: ['art','music','literature','poetry','festival','gallery','exhibition','artist','musician','cultural','tradition','heritage','cuisine','fashion','lifestyle','celebrity','social media','trend','viral','influencer','meme','subculture','renaissance','baroque','contemporary','installation','performance','graffiti','tattoo','street art'] },
+    { id: 'environment', label: 'ENVIRONMENT',    cls: 'g-environment',
+      keys: ['climate','carbon','emissions','renewable','solar','fossil fuel','ecosystem','biodiversity','sustainability','deforestation','ocean','pollution','drought','wildfire','glacier','species','conservation','green energy','net zero','carbon footprint','rewilding','plastic','coral reef','sea level','ozone','methane','reforestation','habitat','endangered'] },
+    { id: 'legal',       label: 'LEGAL',          cls: 'g-legal',
+      keys: ['lawsuit','court','judge','attorney','verdict','plaintiff','defendant','legislation','statute','regulation','compliance','indictment','trial','prosecution','appeal','constitutional','jurisdiction','settlement','arbitration','injunction','subpoena','testimony','deposition','misdemeanor','felony','acquittal','damages','liability','intellectual property','patent'] },
+    { id: 'education',   label: 'EDUCATION',      cls: 'g-education',
+      keys: ['student','university','curriculum','professor','academic','school','scholarship','degree','campus','research paper','thesis','learning','lecture','admission','faculty','tuition','pedagogy','classroom','homeschool','edtech','e-learning','mooc','syllabus','grading','dropout','literacy','stem','exam','assessment','graduation'] },
+    { id: 'history',     label: 'HISTORY',        cls: 'g-history',
+      keys: ['century','ancient','empire','war','revolution','dynasty','civilization','historical','era','medieval','colonial','archeology','chronicle','monument','founded','circa','decade','battle','treaty','conquest','occupation','liberation','renaissance','reformation','migration','artifact','inscription','ruins','excavation','antiquity'] },
+    { id: 'opinion',     label: 'OPINION',        cls: 'g-opinion',
+      keys: ['i believe','in my opinion','i think','i argue','one must','we should','it seems','arguably','clearly','evidently','to my mind','personally','perspective','view','stance','contend','assert','i feel','i suspect','it is clear','the fact remains','without doubt','it is my view','one could argue','let me be clear'] },
+    { id: 'travel',      label: 'TRAVEL',         cls: 'g-travel',
+      keys: ['destination','itinerary','hotel','resort','flight','passport','visa','backpacking','tourism','traveler','sightseeing','landmark','accommodation','hostel','cruise','layover','jet lag','travel guide','excursion','adventure','road trip','solo travel','budget travel','luxury travel','airbnb','check-in','checkout','baggage','carry-on'] },
+    { id: 'food',        label: 'FOOD & DRINK',   cls: 'g-food',
+      keys: ['recipe','ingredient','cuisine','restaurant','chef','cooking','baking','flavor','taste','menu','dish','meal','dining','gastronomy','vegetarian','vegan','gluten-free','spice','sauce','marinate','sauté','grill','fermented','artisan','michelin','street food','cocktail','wine','beer','brew','barista'] },
+    { id: 'gaming',      label: 'GAMING',         cls: 'g-gaming',
+      keys: ['game','player','fps','rpg','esports','console','playstation','xbox','nintendo','steam','multiplayer','single-player','level','quest','boss','dungeon','loot','respawn','spawn','patch','dlc','open world','sandbox','battle royale','twitch','streamer','speedrun','modding','achievement','leaderboard'] },
+    { id: 'ai',          label: 'ARTIFICIAL INTELLIGENCE', cls: 'g-ai',
+      keys: ['llm','large language model','chatgpt','gpt','claude','gemini','mistral','generative ai','diffusion','prompt','fine-tuning','embeddings','tokenizer','inference','training data','hallucination','rag','vector database','agent','autonomous','multimodal','benchmark','rlhf','transformer','attention mechanism','zero-shot','few-shot'] },
+    { id: 'crypto',      label: 'CRYPTO / WEB3',  cls: 'g-crypto',
+      keys: ['blockchain','nft','defi','web3','ethereum','solana','dao','smart contract','wallet','gas fee','token','altcoin','staking','mining','metaverse','decentralized','protocol','dapp','yield farming','airdrop','whitepaper','tokenomics','proof of work','proof of stake','layer 2','bridge','liquidity pool'] },
+    { id: 'space',       label: 'SPACE',          cls: 'g-space',
+      keys: ['nasa','spacex','rocket','orbit','satellite','astronaut','mars','moon','planet','galaxy','telescope','launch','payload','iss','space station','asteroid','meteor','cosmos','stellar','nebula','black hole','exoplanet','rover','lander','mission','countdown','reentry','apogee','perigee','interstellar'] },
+    { id: 'psychology',  label: 'PSYCHOLOGY',     cls: 'g-psychology',
+      keys: ['cognitive','behavior','mental','anxiety','depression','trauma','therapy','therapist','emotion','subconscious','mindset','habit','motivation','phobia','disorder','personality','perception','bias','neuroscience','memory','attachment','resilience','self-esteem','narcissism','empathy','introspection','mindfulness','stoicism'] },
+    { id: 'military',    label: 'MILITARY',       cls: 'g-military',
+      keys: ['army','navy','airforce','soldier','troops','warfare','defense','missile','combat','battle','frontline','drone','artillery','infantry','commander','general','nato','operation','intelligence','surveillance','weapons','armored','siege','ceasefire','casualties','deployment','pentagon','brigade','battalion','strategic'] },
+    { id: 'religion',    label: 'RELIGION',       cls: 'g-religion',
+      keys: ['faith','god','church','mosque','temple','scripture','prayer','worship','spiritual','theology','doctrine','bible','quran','hinduism','buddhism','christianity','islam','clergy','pilgrimage','ritual','sacred','sin','salvation','meditation','dharma','karma','enlightenment','sermon','prophecy'] },
+    { id: 'philosophy',  label: 'PHILOSOPHY',     cls: 'g-philosophy',
+      keys: ['ethics','morality','existence','consciousness','epistemology','ontology','metaphysics','stoic','socrates','plato','aristotle','kant','nietzsche','free will','determinism','utilitarianism','nihilism','relativism','logic','fallacy','paradox','dialectic','dualism','empiricism','rationalism','phenomenology','existentialism'] },
+    { id: 'economy',     label: 'ECONOMY',        cls: 'g-economy',
+      keys: ['recession','growth','gdp','unemployment','trade','export','import','tariff','subsidy','deficit','surplus','austerity','stimulus','monetary policy','central bank','inflation rate','consumer price','producer price','purchasing power','labor market','supply demand','microeconomics','macroeconomics','keynesian','fiscal'] },
+    { id: 'social',      label: 'SOCIAL ISSUES',  cls: 'g-social',
+      keys: ['inequality','poverty','discrimination','racism','gender','lgbtq','diversity','inclusion','human rights','activism','protest','social justice','privilege','marginalized','community','welfare','homelessness','migration','refugee','asylum','civil rights','systemic','oppression','empowerment','advocacy','grassroots'] },
+    { id: 'automotive',  label: 'AUTOMOTIVE',     cls: 'g-automotive',
+      keys: ['car','vehicle','ev','electric vehicle','tesla','hybrid','engine','horsepower','torque','transmission','autonomous driving','self-driving','suv','sedan','hatchback','motorsport','formula 1','rally','dealership','recall','mileage','fuel economy','charging','battery range','obd','chassis','suspension'] },
+    { id: 'real_estate', label: 'REAL ESTATE',    cls: 'g-realestate',
+      keys: ['property','mortgage','rent','landlord','tenant','apartment','house','condo','investment property','listing','broker','realtor','square feet','down payment','interest rate','foreclosure','zoning','development','commercial','residential','lease','renovation','appraisal','homebuyer','market value','mls','open house'] },
+    { id: 'fashion',     label: 'FASHION',        cls: 'g-fashion',
+      keys: ['designer','brand','collection','runway','couture','streetwear','wardrobe','outfit','trend','seasonal','luxury','sustainable fashion','vintage','thrift','lookbook','editorial','vogue','collaboration','capsule','athleisure','accessories','sneakers','jewellery','fabric','textile','silhouette','model','styling'] },
+  ];
+
+  let genreDebounce = null;
+
+  function detectGenres(text) {
+    const lower = text.toLowerCase();
+    const wordCount = lower.split(/\s+/).filter(Boolean).length;
+    if (wordCount < 5) return [];
+
+    const scored = GENRES.map(g => {
+      const hits = g.keys.filter(k => lower.includes(k)).length;
+      return { ...g, score: hits };
+    }).filter(g => g.score > 0).sort((a, b) => b.score - a.score);
+
+    // Return top 3 at most
+    return scored.slice(0, 3);
+  }
+
+  function renderGenreChips(genres) {
+    const container = document.getElementById('genreChips');
+    const placeholder = document.getElementById('genrePlaceholder');
+
+    if (genres.length === 0) {
+      // Remove existing chips with fade
+      container.querySelectorAll('.genre-chip').forEach(c => {
+        c.classList.remove('show');
+        setTimeout(() => c.remove(), 300);
+      });
+      placeholder.style.opacity = '0.4';
+      return;
+    }
+
+    placeholder.style.opacity = '0';
+
+    // Get existing chip IDs
+    const existing = new Set([...container.querySelectorAll('.genre-chip')].map(c => c.dataset.id));
+    const incoming = new Set(genres.map(g => g.id));
+
+    // Remove stale chips
+    container.querySelectorAll('.genre-chip').forEach(c => {
+      if (!incoming.has(c.dataset.id)) {
+        c.classList.remove('show');
+        setTimeout(() => c.remove(), 300);
+      }
+    });
+
+    // Add new chips
+    genres.forEach((g, i) => {
+      if (!existing.has(g.id)) {
+        const chip = document.createElement('span');
+        chip.className = `genre-chip ${g.cls}`;
+        chip.dataset.id = g.id;
+        chip.innerHTML = `<span class="chip-dot"></span>${g.label}`;
+        container.insertBefore(chip, null);
+        // Stagger animation
+        setTimeout(() => chip.classList.add('show'), i * 60 + 20);
+      }
+    });
+  }
+
+  document.getElementById('inputText').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = this.value.length + ' chars';
+
+    clearTimeout(genreDebounce);
+    genreDebounce = setTimeout(() => {
+      const genres = detectGenres(this.value);
+      renderGenreChips(genres);
+    }, 200);
+  });
+
+  async function analyzeText() {
+    const text = document.getElementById('inputText').value.trim();
+    if (!text) return;
+
+    const btn = document.getElementById('analyzeBtn');
+    const loading = document.getElementById('loadingBar');
+    const results = document.getElementById('results');
+    const errMsg = document.getElementById('errorMsg');
+
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spin">◐</span> ANALYZING...`;
+    loading.classList.add('active');
+    results.classList.remove('visible');
+    errMsg.classList.remove('visible');
+
+    const startTime = Date.now();
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/analyze`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ input_text: text })
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.detail || 'Backend request failed');
+      }
+
+      const data = await response.json();
+      const content = data.result;
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+
+      populateResults(content, elapsed);
+
+    } catch (err) {
+      console.error(err);
+      errMsg.textContent = '⚠ ' + (err.message || 'Something went wrong. Check your API key.');
+      errMsg.classList.add('visible');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> ANALYZE`;
+      loading.classList.remove('active');
+    }
+  }
+
+  function extractSection(text, label) {
+    const patterns = [
+      new RegExp(`${label}:\\s*\\n([\\s\\S]*?)(?=\\n[A-Z][\\w\\s]+:|---$|$)`, 'i'),
+      new RegExp(`${label}:\\s*([^\\n]+)`, 'i')
+    ];
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (match) return match[1].trim();
+    }
+    return '';
+  }
+
+  function extractList(text, label) {
+    const section = extractSection(text, label);
+    if (!section) return [];
+    return section.split('\n')
+      .map(l => l.replace(/^[-•*]\s*/, '').trim())
+      .filter(l => l && l !== '...' && l.length > 2);
+  }
+
+  function populateResults(content, elapsed) {
+    // Extract fields
+    const title = extractSection(content, 'Title') || '—';
+    const category = extractSection(content, 'Category') || '—';
+    const sentiment = extractSection(content, 'Sentiment') || 'Neutral';
+    const summary = extractSection(content, 'Summary') || extractSection(content, 'Summary') || '—';
+
+    const entities = extractList(content, 'Key Entities');
+    const keypoints = extractList(content, 'Key Points');
+    const impData = extractList(content, 'Important Data');
+    const timeline = extractList(content, 'Timeline');
+    const insights = extractList(content, 'Insights');
+
+    // Populate
+    document.getElementById('r-title').textContent = title;
+
+    document.getElementById('r-category').innerHTML =
+      `<span class="category-badge">${category.toUpperCase()}</span>`;
+
+    const sentLower = sentiment.toLowerCase();
+    let sentClass = 'sentiment-neutral';
+    let sentIcon = '◆';
+    if (sentLower.includes('positive')) { sentClass = 'sentiment-positive'; sentIcon = '▲'; }
+    else if (sentLower.includes('negative')) { sentClass = 'sentiment-negative'; sentIcon = '▼'; }
+    document.getElementById('r-sentiment').innerHTML =
+      `<div class="sentiment-badge ${sentClass}">${sentIcon} ${sentiment}</div>`;
+
+    const fillList = (id, items) => {
+      const el = document.getElementById(id);
+      if (items.length === 0) {
+        el.innerHTML = '<li>No data found</li>';
+        return;
+      }
+      el.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+    };
+
+    fillList('r-entities', entities);
+    fillList('r-keypoints', keypoints);
+    fillList('r-data', impData);
+    fillList('r-timeline', timeline.length ? timeline : ['No timeline detected']);
+    fillList('r-insights', insights);
+
+    document.getElementById('r-summary').textContent = summary;
+
+    document.getElementById('resultsMeta').textContent =
+      `${elapsed}s · ${content.split(' ').length} tokens est.`;
+
+    document.getElementById('rawOutput').textContent = content;
+
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function clearAll() {
+    document.getElementById('inputText').value = '';
+    document.getElementById('charCount').textContent = '0 chars';
+    document.getElementById('results').classList.remove('visible');
+    document.getElementById('errorMsg').classList.remove('visible');
+    document.getElementById('rawOutput').classList.remove('visible');
+    renderGenreChips([]);
+  }
+
+  function toggleRaw() {
+    const raw = document.getElementById('rawOutput');
+    raw.classList.toggle('visible');
+  }
+
+  // Enter key shortcut (Ctrl/Cmd + Enter)
+  document.getElementById('inputText').addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') analyzeText();
+  });
+</script>
+</body>
+</html>
