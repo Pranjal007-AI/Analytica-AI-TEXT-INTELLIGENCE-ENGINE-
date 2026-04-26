@@ -29,7 +29,6 @@
     overflow-x: hidden;
   }
 
-  /* Animated grid background */
   body::before {
     content: '';
     position: fixed;
@@ -60,7 +59,6 @@
     to { transform: translate(5%, 10%) rotate(5deg); }
   }
 
-  /* Header */
   header {
     position: relative;
     z-index: 10;
@@ -116,7 +114,6 @@
     50% { opacity: 0.4; }
   }
 
-  /* Main layout */
   main {
     position: relative;
     z-index: 10;
@@ -125,9 +122,7 @@
     padding: 48px 48px 80px;
   }
 
-  .hero-text {
-    margin-bottom: 48px;
-  }
+  .hero-text { margin-bottom: 48px; }
 
   .hero-text h1 {
     font-family: 'Bebas Neue', sans-serif;
@@ -152,10 +147,7 @@
     line-height: 1.8;
   }
 
-  /* Input Section */
-  .input-section {
-    margin-bottom: 40px;
-  }
+  .input-section { margin-bottom: 40px; }
 
   .input-label {
     font-size: 0.65rem;
@@ -165,9 +157,7 @@
     text-transform: uppercase;
   }
 
-  .textarea-wrapper {
-    position: relative;
-  }
+  .textarea-wrapper { position: relative; }
 
   textarea {
     width: 100%;
@@ -190,10 +180,7 @@
     box-shadow: 0 0 0 1px rgba(200,245,98,0.1), 0 0 40px rgba(200,245,98,0.05);
   }
 
-  textarea::placeholder {
-    color: var(--muted);
-    opacity: 0.6;
-  }
+  textarea::placeholder { color: var(--muted); opacity: 0.6; }
 
   .char-count {
     position: absolute;
@@ -204,7 +191,6 @@
     letter-spacing: 0.1em;
   }
 
-  /* Controls */
   .controls {
     display: flex;
     gap: 12px;
@@ -258,10 +244,7 @@
     text-transform: uppercase;
   }
 
-  .btn-clear:hover {
-    border-color: var(--accent3);
-    color: var(--accent3);
-  }
+  .btn-clear:hover { border-color: var(--accent3); color: var(--accent3); }
 
   .model-tag {
     margin-left: auto;
@@ -273,7 +256,6 @@
     border-radius: 6px;
   }
 
-  /* Loading */
   .loading-bar {
     height: 2px;
     background: var(--border);
@@ -298,7 +280,6 @@
     100% { background-position: -200% 0; }
   }
 
-  /* Results */
   .results {
     display: none;
     animation: fadeUp 0.5s ease forwards;
@@ -325,20 +306,14 @@
     color: var(--accent);
   }
 
-  .results-meta {
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
+  .results-meta { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
 
-  /* Grid layout for cards */
   .cards-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 16px;
   }
 
-  /* Card base */
   .card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -354,9 +329,7 @@
   .card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(200,245,98,0.15), transparent);
   }
@@ -386,7 +359,6 @@
     line-height: 1.3;
   }
 
-  /* Specific card sizes */
   .c-title { grid-column: span 8; }
   .c-category { grid-column: span 4; }
   .c-sentiment { grid-column: span 4; }
@@ -397,11 +369,7 @@
   .c-insights { grid-column: span 7; }
   .c-summary { grid-column: span 12; }
 
-  /* List inside cards */
-  .card-list {
-    list-style: none;
-    margin-top: 4px;
-  }
+  .card-list { list-style: none; margin-top: 4px; }
 
   .card-list li {
     font-size: 0.8rem;
@@ -424,7 +392,6 @@
     line-height: 1.4;
   }
 
-  /* Sentiment display */
   .sentiment-badge {
     display: inline-flex;
     align-items: center;
@@ -437,25 +404,10 @@
     font-weight: 500;
   }
 
-  .sentiment-positive {
-    background: rgba(200,245,98,0.1);
-    border: 1px solid rgba(200,245,98,0.25);
-    color: var(--accent);
-  }
+  .sentiment-positive { background: rgba(200,245,98,0.1); border: 1px solid rgba(200,245,98,0.25); color: var(--accent); }
+  .sentiment-neutral { background: rgba(123,97,255,0.1); border: 1px solid rgba(123,97,255,0.25); color: var(--accent2); }
+  .sentiment-negative { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.25); color: var(--accent3); }
 
-  .sentiment-neutral {
-    background: rgba(123,97,255,0.1);
-    border: 1px solid rgba(123,97,255,0.25);
-    color: var(--accent2);
-  }
-
-  .sentiment-negative {
-    background: rgba(255,107,53,0.1);
-    border: 1px solid rgba(255,107,53,0.25);
-    color: var(--accent3);
-  }
-
-  /* Summary card */
   .c-summary .card-value {
     font-family: 'Instrument Serif', serif;
     font-size: 1.05rem;
@@ -468,7 +420,6 @@
     margin-top: 6px;
   }
 
-  /* Category badge */
   .category-badge {
     display: inline-block;
     padding: 6px 14px;
@@ -481,14 +432,8 @@
     margin-top: 6px;
   }
 
-  /* Insights card */
-  .c-insights .card-list li::before {
-    content: '✦';
-    color: var(--accent3);
-    font-size: 0.7rem;
-  }
+  .c-insights .card-list li::before { content: '✦'; color: var(--accent3); font-size: 0.7rem; }
 
-  /* Error state */
   .error-msg {
     display: none;
     padding: 16px 20px;
@@ -503,7 +448,6 @@
 
   .error-msg.visible { display: block; }
 
-  /* Footer */
   footer {
     position: relative;
     z-index: 10;
@@ -514,29 +458,21 @@
     justify-content: space-between;
   }
 
-  footer p {
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
+  footer p { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
 
-  /* Scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-  /* Responsive */
   @media (max-width: 900px) {
     header, main, footer { padding-left: 24px; padding-right: 24px; }
     .c-title, .c-category, .c-sentiment, .c-entities, .c-keypoints,
     .c-data, .c-timeline, .c-insights, .c-summary { grid-column: span 12; }
   }
 
-  /* Spinner icon */
   .spin { animation: spin 1s linear infinite; display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Blinking cursor */
   .cursor {
     display: inline-block;
     width: 2px;
@@ -548,7 +484,6 @@
   }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-  /* Genre indicator */
   .genre-indicator {
     display: flex;
     align-items: center;
@@ -565,11 +500,7 @@
     flex-shrink: 0;
   }
 
-  .genre-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+  .genre-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 
   .genre-chip {
     display: inline-flex;
@@ -600,74 +531,68 @@
     100% { box-shadow: none; }
   }
 
-  .genre-chip .chip-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .genre-chip .chip-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
 
-  /* Genre color themes */
-  .g-news       { background: rgba(200,245,98,0.08);  border-color: rgba(200,245,98,0.3);  color: #c8f562; }
-  .g-news       .chip-dot { background: #c8f562; }
-  .g-science    { background: rgba(123,97,255,0.1);   border-color: rgba(123,97,255,0.3);  color: #a08eff; }
-  .g-science    .chip-dot { background: #a08eff; }
-  .g-tech       { background: rgba(56,189,248,0.1);   border-color: rgba(56,189,248,0.3);  color: #38bdf8; }
-  .g-tech       .chip-dot { background: #38bdf8; }
-  .g-politics   { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
-  .g-politics   .chip-dot { background: #fb923c; }
-  .g-business   { background: rgba(52,211,153,0.1);   border-color: rgba(52,211,153,0.3);  color: #34d399; }
-  .g-business   .chip-dot { background: #34d399; }
-  .g-sports     { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #fbbf24; }
-  .g-sports     .chip-dot { background: #fbbf24; }
-  .g-health     { background: rgba(248,113,113,0.1);  border-color: rgba(248,113,113,0.3); color: #f87171; }
-  .g-health     .chip-dot { background: #f87171; }
-  .g-culture    { background: rgba(244,114,182,0.1);  border-color: rgba(244,114,182,0.3); color: #f472b6; }
-  .g-culture    .chip-dot { background: #f472b6; }
-  .g-film       { background: rgba(167,139,250,0.1);  border-color: rgba(167,139,250,0.3); color: #a78bfa; }
-  .g-film       .chip-dot { background: #a78bfa; }
-  .g-finance    { background: rgba(74,222,128,0.1);   border-color: rgba(74,222,128,0.3);  color: #4ade80; }
-  .g-finance    .chip-dot { background: #4ade80; }
-  .g-legal      { background: rgba(148,163,184,0.1);  border-color: rgba(148,163,184,0.3); color: #94a3b8; }
-  .g-legal      .chip-dot { background: #94a3b8; }
-  .g-environment{ background: rgba(110,231,183,0.1);  border-color: rgba(110,231,183,0.3); color: #6ee7b7; }
+  .g-news        { background: rgba(200,245,98,0.08);  border-color: rgba(200,245,98,0.3);  color: #c8f562; }
+  .g-news        .chip-dot { background: #c8f562; }
+  .g-science     { background: rgba(123,97,255,0.1);   border-color: rgba(123,97,255,0.3);  color: #a08eff; }
+  .g-science     .chip-dot { background: #a08eff; }
+  .g-tech        { background: rgba(56,189,248,0.1);   border-color: rgba(56,189,248,0.3);  color: #38bdf8; }
+  .g-tech        .chip-dot { background: #38bdf8; }
+  .g-politics    { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
+  .g-politics    .chip-dot { background: #fb923c; }
+  .g-business    { background: rgba(52,211,153,0.1);   border-color: rgba(52,211,153,0.3);  color: #34d399; }
+  .g-business    .chip-dot { background: #34d399; }
+  .g-sports      { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #fbbf24; }
+  .g-sports      .chip-dot { background: #fbbf24; }
+  .g-health      { background: rgba(248,113,113,0.1);  border-color: rgba(248,113,113,0.3); color: #f87171; }
+  .g-health      .chip-dot { background: #f87171; }
+  .g-culture     { background: rgba(244,114,182,0.1);  border-color: rgba(244,114,182,0.3); color: #f472b6; }
+  .g-culture     .chip-dot { background: #f472b6; }
+  .g-film        { background: rgba(167,139,250,0.1);  border-color: rgba(167,139,250,0.3); color: #a78bfa; }
+  .g-film        .chip-dot { background: #a78bfa; }
+  .g-finance     { background: rgba(74,222,128,0.1);   border-color: rgba(74,222,128,0.3);  color: #4ade80; }
+  .g-finance     .chip-dot { background: #4ade80; }
+  .g-legal       { background: rgba(148,163,184,0.1);  border-color: rgba(148,163,184,0.3); color: #94a3b8; }
+  .g-legal       .chip-dot { background: #94a3b8; }
+  .g-environment { background: rgba(110,231,183,0.1);  border-color: rgba(110,231,183,0.3); color: #6ee7b7; }
   .g-environment .chip-dot { background: #6ee7b7; }
-  .g-education  { background: rgba(253,186,116,0.1);  border-color: rgba(253,186,116,0.3); color: #fdba74; }
-  .g-education  .chip-dot { background: #fdba74; }
-  .g-opinion    { background: rgba(196,181,253,0.1);  border-color: rgba(196,181,253,0.3); color: #c4b5fd; }
-  .g-opinion    .chip-dot { background: #c4b5fd; }
-  .g-history    { background: rgba(253,230,138,0.1);  border-color: rgba(253,230,138,0.3); color: #fde68a; }
-  .g-history    .chip-dot { background: #fde68a; }
-  .g-travel     { background: rgba(34,211,238,0.08);  border-color: rgba(34,211,238,0.3);  color: #22d3ee; }
-  .g-travel     .chip-dot { background: #22d3ee; }
-  .g-food       { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
-  .g-food       .chip-dot { background: #fb923c; }
-  .g-gaming     { background: rgba(163,230,53,0.1);   border-color: rgba(163,230,53,0.3);  color: #a3e635; }
-  .g-gaming     .chip-dot { background: #a3e635; }
-  .g-ai         { background: rgba(192,132,252,0.1);  border-color: rgba(192,132,252,0.3); color: #c084fc; }
-  .g-ai         .chip-dot { background: #c084fc; }
-  .g-crypto     { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #f59e0b; }
-  .g-crypto     .chip-dot { background: #f59e0b; }
-  .g-space      { background: rgba(99,102,241,0.1);   border-color: rgba(99,102,241,0.3);  color: #818cf8; }
-  .g-space      .chip-dot { background: #818cf8; }
-  .g-psychology { background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.3); color: #f9a8d4; }
-  .g-psychology .chip-dot { background: #f9a8d4; }
-  .g-military   { background: rgba(132,204,22,0.08);  border-color: rgba(132,204,22,0.25); color: #84cc16; }
-  .g-military   .chip-dot { background: #84cc16; }
-  .g-religion   { background: rgba(253,230,138,0.08); border-color: rgba(253,230,138,0.3); color: #fcd34d; }
-  .g-religion   .chip-dot { background: #fcd34d; }
-  .g-philosophy { background: rgba(148,163,184,0.08); border-color: rgba(148,163,184,0.3); color: #cbd5e1; }
-  .g-philosophy .chip-dot { background: #cbd5e1; }
-  .g-economy    { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25); color: #6ee7b7; }
-  .g-economy    .chip-dot { background: #6ee7b7; }
-  .g-social     { background: rgba(251,113,133,0.1);  border-color: rgba(251,113,133,0.3); color: #fb7185; }
-  .g-social     .chip-dot { background: #fb7185; }
-  .g-automotive { background: rgba(100,116,139,0.1);  border-color: rgba(100,116,139,0.3); color: #94a3b8; }
-  .g-automotive .chip-dot { background: #94a3b8; }
-  .g-realestate { background: rgba(34,197,94,0.08);   border-color: rgba(34,197,94,0.25);  color: #4ade80; }
-  .g-realestate .chip-dot { background: #4ade80; }
-  .g-fashion    { background: rgba(236,72,153,0.08);  border-color: rgba(236,72,153,0.3);  color: #f472b6; }
-  .g-fashion    .chip-dot { background: #f472b6; }
+  .g-education   { background: rgba(253,186,116,0.1);  border-color: rgba(253,186,116,0.3); color: #fdba74; }
+  .g-education   .chip-dot { background: #fdba74; }
+  .g-opinion     { background: rgba(196,181,253,0.1);  border-color: rgba(196,181,253,0.3); color: #c4b5fd; }
+  .g-opinion     .chip-dot { background: #c4b5fd; }
+  .g-history     { background: rgba(253,230,138,0.1);  border-color: rgba(253,230,138,0.3); color: #fde68a; }
+  .g-history     .chip-dot { background: #fde68a; }
+  .g-travel      { background: rgba(34,211,238,0.08);  border-color: rgba(34,211,238,0.3);  color: #22d3ee; }
+  .g-travel      .chip-dot { background: #22d3ee; }
+  .g-food        { background: rgba(251,146,60,0.1);   border-color: rgba(251,146,60,0.3);  color: #fb923c; }
+  .g-food        .chip-dot { background: #fb923c; }
+  .g-gaming      { background: rgba(163,230,53,0.1);   border-color: rgba(163,230,53,0.3);  color: #a3e635; }
+  .g-gaming      .chip-dot { background: #a3e635; }
+  .g-ai          { background: rgba(192,132,252,0.1);  border-color: rgba(192,132,252,0.3); color: #c084fc; }
+  .g-ai          .chip-dot { background: #c084fc; }
+  .g-crypto      { background: rgba(251,191,36,0.1);   border-color: rgba(251,191,36,0.3);  color: #f59e0b; }
+  .g-crypto      .chip-dot { background: #f59e0b; }
+  .g-space       { background: rgba(99,102,241,0.1);   border-color: rgba(99,102,241,0.3);  color: #818cf8; }
+  .g-space       .chip-dot { background: #818cf8; }
+  .g-psychology  { background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.3); color: #f9a8d4; }
+  .g-psychology  .chip-dot { background: #f9a8d4; }
+  .g-military    { background: rgba(132,204,22,0.08);  border-color: rgba(132,204,22,0.25); color: #84cc16; }
+  .g-military    .chip-dot { background: #84cc16; }
+  .g-religion    { background: rgba(253,230,138,0.08); border-color: rgba(253,230,138,0.3); color: #fcd34d; }
+  .g-religion    .chip-dot { background: #fcd34d; }
+  .g-philosophy  { background: rgba(148,163,184,0.08); border-color: rgba(148,163,184,0.3); color: #cbd5e1; }
+  .g-philosophy  .chip-dot { background: #cbd5e1; }
+  .g-economy     { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25); color: #6ee7b7; }
+  .g-economy     .chip-dot { background: #6ee7b7; }
+  .g-social      { background: rgba(251,113,133,0.1);  border-color: rgba(251,113,133,0.3); color: #fb7185; }
+  .g-social      .chip-dot { background: #fb7185; }
+  .g-automotive  { background: rgba(100,116,139,0.1);  border-color: rgba(100,116,139,0.3); color: #94a3b8; }
+  .g-automotive  .chip-dot { background: #94a3b8; }
+  .g-realestate  { background: rgba(34,197,94,0.08);   border-color: rgba(34,197,94,0.25);  color: #4ade80; }
+  .g-realestate  .chip-dot { background: #4ade80; }
+  .g-fashion     { background: rgba(236,72,153,0.08);  border-color: rgba(236,72,153,0.3);  color: #f472b6; }
+  .g-fashion     .chip-dot { background: #f472b6; }
 
   .genre-placeholder {
     font-size: 0.68rem;
@@ -678,7 +603,6 @@
     transition: opacity 0.3s;
   }
 
-  /* Raw output section */
   .raw-toggle {
     margin-top: 28px;
     display: flex;
@@ -731,14 +655,12 @@
     <p>Powered by Mistral Large. Drop any text — article, news, research, product copy — and get instant structured intelligence.</p>
   </div>
 
-  <!-- Input Section -->
   <div class="input-section">
     <div class="input-label">// INPUT TEXT</div>
     <div class="textarea-wrapper">
       <textarea id="inputText" placeholder="Paste your article, paragraph, news snippet, or any text here..." spellcheck="false"></textarea>
       <div class="char-count" id="charCount">0 chars</div>
     </div>
-    <!-- Live Genre Indicator -->
     <div class="genre-indicator">
       <div class="genre-label-tag">// GENRE</div>
       <div class="genre-chips" id="genreChips">
@@ -756,15 +678,12 @@
     </div>
   </div>
 
-  <!-- Loading Bar -->
   <div class="loading-bar" id="loadingBar">
     <div class="loading-bar-inner"></div>
   </div>
 
-  <!-- Error -->
   <div class="error-msg" id="errorMsg"></div>
 
-  <!-- Results -->
   <div class="results" id="results">
     <div class="results-header">
       <div class="results-title">// ANALYSIS COMPLETE</div>
@@ -772,62 +691,52 @@
     </div>
 
     <div class="cards-grid">
-      <!-- Title -->
       <div class="card c-title">
         <div class="card-label">Title</div>
         <div class="card-value" id="r-title">—</div>
       </div>
 
-      <!-- Category -->
       <div class="card c-category">
         <div class="card-label">Category</div>
         <div id="r-category"><span class="category-badge">—</span></div>
       </div>
 
-      <!-- Sentiment -->
       <div class="card c-sentiment">
         <div class="card-label">Sentiment</div>
         <div id="r-sentiment"></div>
       </div>
 
-      <!-- Key Entities -->
       <div class="card c-entities">
         <div class="card-label">Key Entities</div>
         <ul class="card-list" id="r-entities"></ul>
       </div>
 
-      <!-- Key Points -->
       <div class="card c-keypoints">
         <div class="card-label">Key Points</div>
         <ul class="card-list" id="r-keypoints"></ul>
       </div>
 
-      <!-- Important Data -->
       <div class="card c-data">
         <div class="card-label">Important Data</div>
         <ul class="card-list" id="r-data"></ul>
       </div>
 
-      <!-- Timeline -->
       <div class="card c-timeline">
         <div class="card-label">Timeline</div>
         <ul class="card-list" id="r-timeline"></ul>
       </div>
 
-      <!-- Insights -->
       <div class="card c-insights">
         <div class="card-label">Insights</div>
         <ul class="card-list" id="r-insights"></ul>
       </div>
 
-      <!-- Summary -->
       <div class="card c-summary">
         <div class="card-label">Summary</div>
         <div class="card-value" id="r-summary">—</div>
       </div>
     </div>
 
-    <!-- Raw Output Toggle -->
     <div class="raw-toggle" onclick="toggleRaw()">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       VIEW RAW OUTPUT
@@ -842,70 +751,7 @@
 </footer>
 
 <script>
-  // ── Backend URL — Render pe deploy hone ke baad yahan apna URL daalo ──
   const BACKEND_URL = "https://cinrsage-backend.onrender.com";
-
-  const SYSTEM_PROMPT = `You are an expert AI assistant specialized in:
-- extracting key information
-- summarizing content clearly
-
-Your responses must be accurate, structured, and easy to read.
-
-Do not hallucinate.
-If information is missing, simply skip it.
-
-Think internally but do not show reasoning.`;
-
-  const USER_PROMPT_TEMPLATE = (text) => `Analyze the text below and produce a well-structured output.
-
-========================
-INPUT:
-${text}
-========================
-
-### Your Output Must Follow This Format:
-
-Title:
-<main topic or heading>
-
-Category:
-<type like Movie, Article, News, Product, etc.>
-
-Key Entities:
-- ...
-- ...
-- ...
-
-Key Points:
-- ...
-- ...
-- ...
-
-Important Data:
-- ...
-- ...
-
-Timeline (if any):
-- ...
-- ...
-
-Insights:
-- ...
-- ...
-
-Sentiment:
-<Positive / Neutral / Negative>
-
-Summary:
-<clear, concise paragraph under 120 words>
-
----
-
-### Rules:
-- Keep it clean and readable
-- Do not add extra explanations
-- Do not repeat information
-- Be precise and factual`;
 
   // ── Genre Detection ──────────────────────────────────────────────
   const GENRES = [
@@ -977,22 +823,17 @@ Summary:
     const lower = text.toLowerCase();
     const wordCount = lower.split(/\s+/).filter(Boolean).length;
     if (wordCount < 5) return [];
-
     const scored = GENRES.map(g => {
       const hits = g.keys.filter(k => lower.includes(k)).length;
       return { ...g, score: hits };
     }).filter(g => g.score > 0).sort((a, b) => b.score - a.score);
-
-    // Return top 3 at most
     return scored.slice(0, 3);
   }
 
   function renderGenreChips(genres) {
     const container = document.getElementById('genreChips');
     const placeholder = document.getElementById('genrePlaceholder');
-
     if (genres.length === 0) {
-      // Remove existing chips with fade
       container.querySelectorAll('.genre-chip').forEach(c => {
         c.classList.remove('show');
         setTimeout(() => c.remove(), 300);
@@ -1000,22 +841,15 @@ Summary:
       placeholder.style.opacity = '0.4';
       return;
     }
-
     placeholder.style.opacity = '0';
-
-    // Get existing chip IDs
     const existing = new Set([...container.querySelectorAll('.genre-chip')].map(c => c.dataset.id));
     const incoming = new Set(genres.map(g => g.id));
-
-    // Remove stale chips
     container.querySelectorAll('.genre-chip').forEach(c => {
       if (!incoming.has(c.dataset.id)) {
         c.classList.remove('show');
         setTimeout(() => c.remove(), 300);
       }
     });
-
-    // Add new chips
     genres.forEach((g, i) => {
       if (!existing.has(g.id)) {
         const chip = document.createElement('span');
@@ -1023,7 +857,6 @@ Summary:
         chip.dataset.id = g.id;
         chip.innerHTML = `<span class="chip-dot"></span>${g.label}`;
         container.insertBefore(chip, null);
-        // Stagger animation
         setTimeout(() => chip.classList.add('show'), i * 60 + 20);
       }
     });
@@ -1031,13 +864,38 @@ Summary:
 
   document.getElementById('inputText').addEventListener('input', function() {
     document.getElementById('charCount').textContent = this.value.length + ' chars';
-
     clearTimeout(genreDebounce);
     genreDebounce = setTimeout(() => {
       const genres = detectGenres(this.value);
       renderGenreChips(genres);
     }, 200);
   });
+
+  // ── RETRY LOGIC — Render cold start handle karta hai ──
+  async function fetchWithRetry(text, retries = 2) {
+    const btn = document.getElementById('analyzeBtn');
+    for (let i = 0; i < retries; i++) {
+      try {
+        if (i > 0) {
+          btn.innerHTML = `<span class="spin">◐</span> WAKING SERVER (${i}/${retries})...`;
+          await new Promise(r => setTimeout(r, 4000));
+        }
+        const res = await fetch(`${BACKEND_URL}/analyze`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ input_text: text }),
+          signal: AbortSignal.timeout(60000)
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.detail || 'Backend request failed');
+        }
+        return await res.json();
+      } catch (e) {
+        if (i === retries - 1) throw e;
+      }
+    }
+  }
 
   async function analyzeText() {
     const text = document.getElementById('inputText').value.trim();
@@ -1057,28 +915,13 @@ Summary:
     const startTime = Date.now();
 
     try {
-      const response = await fetch(`${BACKEND_URL}/analyze`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ input_text: text })
-      });
-
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.detail || 'Backend request failed');
-      }
-
-      const data = await response.json();
+      const data = await fetchWithRetry(text);
       const content = data.result;
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-
       populateResults(content, elapsed);
-
     } catch (err) {
       console.error(err);
-      errMsg.textContent = '⚠ ' + (err.message || 'Something went wrong. Check your API key.');
+      errMsg.textContent = '⚠ ' + (err.message || 'Server unreachable. Please try again in a moment.');
       errMsg.classList.add('visible');
     } finally {
       btn.disabled = false;
@@ -1108,39 +951,31 @@ Summary:
   }
 
   function populateResults(content, elapsed) {
-    // Extract fields
     const title = extractSection(content, 'Title') || '—';
     const category = extractSection(content, 'Category') || '—';
     const sentiment = extractSection(content, 'Sentiment') || 'Neutral';
-    const summary = extractSection(content, 'Summary') || extractSection(content, 'Summary') || '—';
+    const summary = extractSection(content, 'Summary') || '—';
 
-    const entities = extractList(content, 'Key Entities');
+    const entities  = extractList(content, 'Key Entities');
     const keypoints = extractList(content, 'Key Points');
-    const impData = extractList(content, 'Important Data');
-    const timeline = extractList(content, 'Timeline');
-    const insights = extractList(content, 'Insights');
+    const impData   = extractList(content, 'Important Data');
+    const timeline  = extractList(content, 'Timeline');
+    const insights  = extractList(content, 'Insights');
 
-    // Populate
     document.getElementById('r-title').textContent = title;
-
-    document.getElementById('r-category').innerHTML =
-      `<span class="category-badge">${category.toUpperCase()}</span>`;
+    document.getElementById('r-category').innerHTML = `<span class="category-badge">${category.toUpperCase()}</span>`;
 
     const sentLower = sentiment.toLowerCase();
-    let sentClass = 'sentiment-neutral';
-    let sentIcon = '◆';
+    let sentClass = 'sentiment-neutral', sentIcon = '◆';
     if (sentLower.includes('positive')) { sentClass = 'sentiment-positive'; sentIcon = '▲'; }
     else if (sentLower.includes('negative')) { sentClass = 'sentiment-negative'; sentIcon = '▼'; }
-    document.getElementById('r-sentiment').innerHTML =
-      `<div class="sentiment-badge ${sentClass}">${sentIcon} ${sentiment}</div>`;
+    document.getElementById('r-sentiment').innerHTML = `<div class="sentiment-badge ${sentClass}">${sentIcon} ${sentiment}</div>`;
 
     const fillList = (id, items) => {
       const el = document.getElementById(id);
-      if (items.length === 0) {
-        el.innerHTML = '<li>No data found</li>';
-        return;
-      }
-      el.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+      el.innerHTML = items.length
+        ? items.map(i => `<li>${i}</li>`).join('')
+        : '<li>No data found</li>';
     };
 
     fillList('r-entities', entities);
@@ -1150,12 +985,8 @@ Summary:
     fillList('r-insights', insights);
 
     document.getElementById('r-summary').textContent = summary;
-
-    document.getElementById('resultsMeta').textContent =
-      `${elapsed}s · ${content.split(' ').length} tokens est.`;
-
+    document.getElementById('resultsMeta').textContent = `${elapsed}s · ${content.split(' ').length} tokens est.`;
     document.getElementById('rawOutput').textContent = content;
-
     document.getElementById('results').classList.add('visible');
     document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -1170,11 +1001,9 @@ Summary:
   }
 
   function toggleRaw() {
-    const raw = document.getElementById('rawOutput');
-    raw.classList.toggle('visible');
+    document.getElementById('rawOutput').classList.toggle('visible');
   }
 
-  // Enter key shortcut (Ctrl/Cmd + Enter)
   document.getElementById('inputText').addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') analyzeText();
   });
