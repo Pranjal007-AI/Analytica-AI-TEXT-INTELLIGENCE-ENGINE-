@@ -829,93 +829,80 @@
   let audioBlob      = null;
   let audioURL       = null;
 
-  // ── Audio Player ─────────────────────────────────────────────────
-  const audioEl = document.getElementById('audioPlayer');
-
-  audioEl.addEventListener('timeupdate', () => {
-    if (!audioEl.duration) return;
-    const pct = (audioEl.currentTime / audioEl.duration) * 100;
-    document.getElementById('audioFill').style.width = pct + '%';
-    document.getElementById('audioTime').textContent = fmtTime(audioEl.currentTime);
-  });
-
-  audioEl.addEventListener('ended', () => {
-    document.getElementById('playLabel').textContent = 'PLAY';
-    document.getElementById('playIcon').innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
-    document.getElementById('audioFill').style.width = '0%';
-  });
-
-  function fmtTime(s) {
-    const m = Math.floor(s / 60);
-    return `${m}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-  }
-
+  // ── Browser TTS Voice ────────────────────────────────────────────
   function togglePlay() {
-    if (!audioURL) return;
-    if (audioEl.paused) {
-      audioEl.play();
-      document.getElementById('playLabel').textContent = 'PAUSE';
-      document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-    } else {
-      audioEl.pause();
+    if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+      window.speechSynthesis.pause();
       document.getElementById('playLabel').textContent = 'PLAY';
       document.getElementById('playIcon').innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+    } else if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+      document.getElementById('playLabel').textContent = 'PAUSE';
+      document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
     }
   }
 
   function replayAudio() {
-    if (!audioURL) return;
-    audioEl.currentTime = 0;
-    audioEl.play();
-    document.getElementById('playLabel').textContent = 'PAUSE';
-    document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    if (window._currentUtterance) {
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(window._currentUtterance);
+      document.getElementById('playLabel').textContent = 'PAUSE';
+      document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    }
   }
 
-  function seekAudio(e) {
-    if (!audioEl.duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    audioEl.currentTime = pct * audioEl.duration;
-  }
+  function seekAudio(e) { /* not applicable for browser TTS */ }
 
-  // ── Voice Generation ──────────────────────────────────────────────
   async function generateVoice(text) {
     const statusEl  = document.getElementById('voiceStatus');
     const statusTxt = document.getElementById('voiceStatusText');
     const controls  = document.getElementById('voiceControls');
 
-    statusEl.className  = 'voice-status loading';
+    statusEl.className = 'voice-status loading';
     statusTxt.textContent = 'GENERATING AUDIO...';
     controls.style.display = 'none';
 
-    try {
-      const res = await fetch(`${BACKEND_URL}/voice`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
-        signal: AbortSignal.timeout(30000)
-      });
+    window.speechSynthesis.cancel();
 
-      if (!res.ok) throw new Error('Voice API failed');
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    utterance.pitch = 1;
+    utterance.volume = 1;
 
-      const blob = await res.blob();
-      audioBlob = blob;
-      audioURL  = URL.createObjectURL(blob);
-      audioEl.src = audioURL;
+    const loadVoices = () => new Promise(resolve => {
+      const v = window.speechSynthesis.getVoices();
+      if (v.length) { resolve(v); return; }
+      window.speechSynthesis.onvoiceschanged = () => resolve(window.speechSynthesis.getVoices());
+    });
 
-      statusEl.className  = 'voice-status ready';
-      statusTxt.textContent = 'AUDIO READY';
+    const voices = await loadVoices();
+    const preferred = voices.find(v => v.name.includes('Google') && v.lang.startsWith('en'))
+      || voices.find(v => v.lang === 'en-US')
+      || voices[0];
+    if (preferred) utterance.voice = preferred;
+
+    utterance.onstart = () => {
+      statusEl.className = 'voice-status ready';
+      statusTxt.textContent = 'PLAYING...';
       controls.style.display = 'flex';
-
-      // Auto-play
-      await audioEl.play();
       document.getElementById('playLabel').textContent = 'PAUSE';
       document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+    };
 
-    } catch (err) {
-      statusEl.className  = 'voice-status error';
-      statusTxt.textContent = 'VOICE UNAVAILABLE — ' + (err.message || 'check API key');
-    }
+    utterance.onend = () => {
+      statusTxt.textContent = 'AUDIO READY';
+      document.getElementById('playLabel').textContent = 'PLAY';
+      document.getElementById('playIcon').innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+      document.getElementById('audioFill').style.width = '0%';
+    };
+
+    utterance.onerror = (e) => {
+      statusEl.className = 'voice-status error';
+      statusTxt.textContent = 'VOICE ERROR — ' + e.error;
+    };
+
+    window._currentUtterance = utterance;
+    window.speechSynthesis.speak(utterance);
   }
 
   // ── Image Generation ──────────────────────────────────────────────
