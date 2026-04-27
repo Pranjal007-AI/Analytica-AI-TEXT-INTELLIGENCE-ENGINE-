@@ -29,8 +29,8 @@ Drop in any text and get:
 | Frontend | HTML, CSS, Vanilla JS |
 | Backend | FastAPI (Python) |
 | AI Model | Mistral Large (via LangChain) |
-| Image Generation | Pollinations.ai (free, no API key) |
-| Voice | Browser Web Speech API (free) |
+| Image Generation | Pollinations.ai API |
+| Voice | Browser Web Speech API|
 | Backend Hosting | Render |
 | Frontend Hosting | Netlify |
 
